@@ -1,0 +1,30 @@
+#!/bin/bash
+set -e
+
+##########. WARNING. #################
+## This is a hack. plain and simple.
+## Do not try this at home.
+######################################
+
+PACKAGES_DIR=/var/vcap/packages
+JOB_DIR=/var/vcap/jobs/uaa-customized
+
+# Allow for > 128bit encryption
+cp -a "${PACKAGES_DIR}/jce-policy/UnlimitedJCEPolicyJDK8/*.jar" "${PACKAGES_DIR}/uaa/jdk/jre/lib/security"
+
+WARFILE="${PACKAGES_DIR}/uaa/tomcat/webapps/ROOT.war"
+JARFILE="WEB-INF/lib/cloudfoundry-identity-server-*.jar"
+
+WAR_TEMPDIR="$(mktemp)"
+pushd "$WAR_TEMPDIR"
+unzip "$WARFILE" "$JARFILE"
+mkdir -p templates/web
+cp "$JOB_DIR/web/*" templates/web
+zip -u "$JARFILE" templates/web/*
+rm -rf templates
+zip -u "$WARFILE" "$JARFILE"
+unzip "$WARFILE" "resources/oss/stylesheets/*"
+cp "$JOB_DIR/css/*" resources/oss/stylesheets
+zip -u "$WARFILE" resources/oss/stylesheets/*
+resources/oss/stylesheets
+popd

@@ -1,0 +1,15 @@
+name: uaa-customized
+version: "1"
+commit_hash: empty
+uncommitted_changes: true
+jobs:
+- name: uaa-customized
+  version: 98f1f6ae6ea724ee4641b4443e269423806d85e7
+  fingerprint: 98f1f6ae6ea724ee4641b4443e269423806d85e7
+  sha1: ff9fbaf6529deaa621a9663a0294aaf6df72ec59
+packages:
+- name: jce-policy
+  version: b35a9137a7bdd4380b94826c417e67822fa9c20b
+  fingerprint: b35a9137a7bdd4380b94826c417e67822fa9c20b
+  sha1: 640a416c55c1befdb22257a74a68497653065868
+  dependencies: []

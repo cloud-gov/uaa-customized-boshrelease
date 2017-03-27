@@ -1,0 +1,9 @@
+---
+name: uaa-customized
+
+packages:
+  - jce-policy
+
+templates:
+  pre-start: bin/pre-start
+  web/login.html: web/login.html

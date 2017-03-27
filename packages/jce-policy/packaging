@@ -1,0 +1,6 @@
+set -e -x
+
+cd ${BOSH_INSTALL_TARGET}
+
+# Allow for > 128bit encryption
+unzip ${BOSH_COMPILE_TARGET}/openjdk/jce-policy-8.zip
