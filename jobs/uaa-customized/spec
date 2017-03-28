@@ -11,14 +11,14 @@ templates:
   govcloud/web/pw_validation.html: govcloud/web/pw_validation.html
   govcloud/web/change_password.html: govcloud/web/change_password.html
   govcloud/web/invitations/accept_invite.html: govcloud/web/invitations/accept_invite.html
-  govcloud/resources/stylesheets/application.css: govcloud/resources/stylesheets/application.css
+  govcloud/resources/oss/stylesheets/application.css: govcloud/resources/oss/stylesheets/application.css
   govcloud/resources/javascripts/pw_validation.js: govcloud/resources/javascripts/pw_validation.js
 
   east/web/login.html: east/web/login.html
   east/web/pw_validation.html: east/web/pw_validation.html
   east/web/change_password.html: east/web/change_password.html
   east/web/invitations/accept_invite.html: east/web/invitations/accept_invite.html
-  east/resources/stylesheets/application.css: east/resources/stylesheets/application.css
+  east/resources/oss/stylesheets/application.css: east/resources/oss/stylesheets/application.css
   east/resources/javascripts/pw_validation.js: east/resources/javascripts/pw_validation.js
 
 properties:

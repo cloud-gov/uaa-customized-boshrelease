@@ -23,7 +23,7 @@ cp -a "$JOB_DIR"/<%= p("uaa-customized.template-directory") %>/web/* templates/w
 zip -r -u "$JARFILE" templates/web
 rm -rf templates
 zip -u "$WARFILE" "$JARFILE"
-unzip "$WARFILE" "resources/oss/*"
-cp -a "$JOB_DIR"/<%= p("uaa-customized.template-directory") %>/resources/* resources/oss/
-zip -r -u "$WARFILE" resources/oss
+unzip "$WARFILE" "resources/*"
+cp -a "$JOB_DIR"/<%= p("uaa-customized.template-directory") %>/resources/* resources/
+zip -r -u "$WARFILE" resources
 popd
