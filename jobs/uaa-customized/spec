@@ -2,8 +2,9 @@
 name: uaa-customized
 
 packages:
-  - jce-policy
+- jce-policy
 
 templates:
   pre-start: bin/pre-start
   web/login.html: web/login.html
+  css/application.css: css/application.css
