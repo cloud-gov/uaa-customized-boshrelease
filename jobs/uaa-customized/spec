@@ -22,7 +22,7 @@ templates:
   east/resources/javascripts/pw_validation.js: east/resources/javascripts/pw_validation.js
 
 properties:
-  template-directory:
+  uaa-customized.template-directory:
     description: "Custom template directory"
     default: govcloud
 
