@@ -6,5 +6,12 @@ packages:
 
 templates:
   pre-start: bin/pre-start
-  web/login.html: web/login.html
-  css/application.css: css/application.css
+  govcloud/web/login.html: govcloud/web/login.html
+  govcloud/resources/stylesheets/application.css: govcloud/resources/stylesheets/application.css
+  east/web/login.html: east/web/login.html
+  east/resources/stylesheets/application.css: east/resources/stylesheets/application.css
+
+properties:
+  template-directory:
+    description: "Custom template directory"
+    default: govcloud

@@ -19,11 +19,11 @@ WAR_TEMPDIR="$(mktemp -d)"
 pushd "$WAR_TEMPDIR"
 unzip "$WARFILE" "$JARFILE"
 mkdir -p templates/web
-cp "$JOB_DIR"/web/* templates/web
+cp -a "$JOB_DIR"/<%= p("template-directory") %>/web/* templates/web
 zip -u "$JARFILE" templates/web/*
 rm -rf templates
 zip -u "$WARFILE" "$JARFILE"
-unzip "$WARFILE" "resources/oss/stylesheets/*"
-cp "$JOB_DIR"/css/* resources/oss/stylesheets
-zip -u "$WARFILE" resources/oss/stylesheets/*
+unzip "$WARFILE" "resources/oss/*"
+cp -a "$JOB_DIR"/<%= p("template-directory") %>/resources/* resources/oss/
+zip -u "$WARFILE" resources/oss/*
 popd
