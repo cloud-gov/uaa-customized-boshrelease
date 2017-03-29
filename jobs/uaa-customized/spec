@@ -6,12 +6,43 @@ packages:
 
 templates:
   pre-start: bin/pre-start
+
   govcloud/web/login.html: govcloud/web/login.html
-  govcloud/resources/stylesheets/application.css: govcloud/resources/stylesheets/application.css
+  govcloud/web/pw_validation.html: govcloud/web/pw_validation.html
+  govcloud/web/reset_password.html: govcloud/web/reset_password.html
+  govcloud/web/change_password.html: govcloud/web/change_password.html
+  govcloud/web/accounts/new_activation_email.html: govcloud/web/accounts/new_activation_email.html
+  govcloud/web/invitations/accept_invite.html: govcloud/web/invitations/accept_invite.html
+  govcloud/resources/oss/stylesheets/application.css: govcloud/resources/oss/stylesheets/application.css
+  govcloud/resources/javascripts/pw_validation.js: govcloud/resources/javascripts/pw_validation.js
+
   east/web/login.html: east/web/login.html
-  east/resources/stylesheets/application.css: east/resources/stylesheets/application.css
+  east/web/pw_validation.html: east/web/pw_validation.html
+  east/web/reset_password.html: east/web/reset_password.html
+  east/web/change_password.html: east/web/change_password.html
+  east/web/accounts/new_activation_email.html: east/web/accounts/new_activation_email.html
+  east/web/invitations/accept_invite.html: east/web/invitations/accept_invite.html
+  east/resources/oss/stylesheets/application.css: east/resources/oss/stylesheets/application.css
+  east/resources/javascripts/pw_validation.js: east/resources/javascripts/pw_validation.js
 
 properties:
-  template-directory:
+  uaa-customized.template-directory:
     description: "Custom template directory"
     default: govcloud
+
+  # Copied from https://github.com/cloudfoundry/uaa-release/blob/develop/jobs/uaa/spec
+  uaa.password.policy.minLength:
+    description: "Minimum number of characters required for password to be considered valid"
+    default: 0
+  uaa.password.policy.requireUpperCaseCharacter:
+    description: "Minimum number of uppercase characters required for password to be considered valid"
+    default: 0
+  uaa.password.policy.requireLowerCaseCharacter:
+    description: "Minimum number of lowercase characters required for password to be considered valid"
+    default: 0
+  uaa.password.policy.requireDigit:
+    description: "Minimum number of digits required for password to be considered valid"
+    default: 0
+  uaa.password.policy.requireSpecialCharacter:
+    description: "Minimum number of special characters required for password to be considered valid"
+    default: 0

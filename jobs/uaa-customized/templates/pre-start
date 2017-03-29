@@ -13,17 +13,20 @@ JOB_DIR=/var/vcap/jobs/uaa-customized
 cp -a "${PACKAGES_DIR}"/jce-policy/UnlimitedJCEPolicyJDK8/*.jar "${PACKAGES_DIR}/uaa/jdk/jre/lib/security"
 
 WARFILE="${PACKAGES_DIR}/uaa/tomcat/webapps/ROOT.war"
-JARFILE="WEB-INF/lib/cloudfoundry-identity-server-*.jar"
-
+JARFILE=$(unzip -v "${WARFILE}" | grep cloudfoundry-identity-server- | awk '{print $8}')
 WAR_TEMPDIR="$(mktemp -d)"
+
 pushd "$WAR_TEMPDIR"
-unzip "$WARFILE" "$JARFILE"
-mkdir -p templates/web
-cp -a "$JOB_DIR"/<%= p("template-directory") %>/web/* templates/web
-zip -u "$JARFILE" templates/web/*
-rm -rf templates
-zip -u "$WARFILE" "$JARFILE"
-unzip "$WARFILE" "resources/oss/*"
-cp -a "$JOB_DIR"/<%= p("template-directory") %>/resources/* resources/oss/
-zip -u "$WARFILE" resources/oss/*
+  unzip "$WARFILE" "$JARFILE"
+
+  mkdir -p templates/web
+  cp -a "$JOB_DIR"/<%= p("uaa-customized.template-directory") %>/web/* templates/web
+  zip -r -u "$JARFILE" templates/web
+  zip -u "$WARFILE" "$JARFILE"
+
+  mkdir resources
+  cp -a "$JOB_DIR"/<%= p("uaa-customized.template-directory") %>/resources/* resources/
+  zip -r -u "$WARFILE" resources
 popd
+
+rm -rf "$WAR_TEMPDIR"
