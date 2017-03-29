@@ -6,6 +6,7 @@ packages:
 
 templates:
   pre-start: bin/pre-start
+  post-start: bin/post-start
 
   govcloud/web/login.html: govcloud/web/login.html
   govcloud/web/pw_validation.html: govcloud/web/pw_validation.html
