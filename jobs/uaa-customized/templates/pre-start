@@ -21,12 +21,12 @@ pushd "$WAR_TEMPDIR"
 
   mkdir -p templates/web
   cp -a "$JOB_DIR"/<%= p("uaa-customized.template-directory") %>/web/* templates/web
-  zip -r -u "$JARFILE" templates/web
-  zip -u "$WARFILE" "$JARFILE"
+  zip -r "$JARFILE" templates/web
+  zip "$WARFILE" "$JARFILE"
 
   mkdir resources
   cp -a "$JOB_DIR"/<%= p("uaa-customized.template-directory") %>/resources/* resources/
-  zip -r -u "$WARFILE" resources
+  zip -r "$WARFILE" resources
 popd
 
 rm -rf "$WAR_TEMPDIR"
