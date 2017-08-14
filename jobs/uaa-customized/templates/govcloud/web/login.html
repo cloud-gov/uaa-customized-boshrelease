@@ -10,11 +10,11 @@
             <p>This is a U.S. government service. Your use indicates your consent to monitoring, recording, and no expectation of privacy. Misuse is subject to criminal and civil penalties. <a href="#" class="js-notice-read_more">Read more details.</a>
             </p>
             <input type="submit" value="Agree and continue" class="island-button js-notice-submit" />
-        </div>
-        <div class="island">
-            <p>
-                <a href="https://cloud.gov/docs/getting-started/accounts/">Learn about getting access to cloud.gov.</a>
-            </p>
+            <div class="panel-container">
+                <p>
+                    <a href="https://cloud.gov/docs/getting-started/accounts/">Learn about getting access to cloud.gov.</a>
+                </p>
+            </div>
         </div>
         <div class="js-notice-more_information modal fade">
             <div class="modal-dialog" role="document">
@@ -99,9 +99,13 @@
             </script>
         </div>
     </div>
-    <p>Developers can log in via the command line:</p>
-    <pre class="island-content">cf login -a api.fr.cloud.gov  --sso</pre>
-    <a href="https://cloud.gov/docs/getting-started/setup/#quick-reference">See our documentation for login details</a>
+    <div class="panel-container">
+      <p>Developers can log in via the command line:</p>
+      <div class="island-content">
+        <pre class="card">cf login -a api.fr.cloud.gov  --sso</pre>
+      </div>
+      <a href="https://cloud.gov/docs/getting-started/setup/#quick-reference">See our documentation for login details</a>
+    </div>
 </div>
 
 </html>
