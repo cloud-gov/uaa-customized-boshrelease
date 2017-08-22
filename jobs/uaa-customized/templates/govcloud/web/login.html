@@ -10,6 +10,11 @@
             <p>This is a U.S. government service. Your use indicates your consent to monitoring, recording, and no expectation of privacy. Misuse is subject to criminal and civil penalties. <a href="#" class="js-notice-read_more">Read more details.</a>
             </p>
             <input type="submit" value="Agree and continue" class="island-button js-notice-submit" />
+            <div class="panel-container">
+                <p>
+                    <a href="https://cloud.gov/docs/getting-started/accounts/">Learn about getting access to cloud.gov.</a>
+                </p>
+            </div>
         </div>
         <div class="js-notice-more_information modal fade">
             <div class="modal-dialog" role="document">
@@ -61,44 +66,59 @@
                     </div>
                 </div>
             </th:block>
-            <script th:inline="javascript">
-                /*<![CDATA[*/
-                var login = document.querySelector('.js-full_login');
-                var notice = document.querySelector('.js-notice');
-                var noticeReadMore = document.querySelector('.js-notice-read_more');
-                var noticeSubmit = document.querySelector('.js-notice-submit');
-                var noticeMoreInformation = document.querySelector(
-                    '.js-notice-more_information');
-                var noticeMoreInformationDismiss = document.querySelectorAll(
-                    '.js-notice-more_information-dismiss');
-                login.style.display = 'none';
-                noticeReadMore.addEventListener('click', function(ev) {
-                    ev.preventDefault();
-                    console.log('on read more');
-                    noticeMoreInformation.style.display = 'block';
-                    noticeMoreInformation.style.opacity = 100;
-                });
-                for (var i = 0; i < noticeMoreInformationDismiss.length; i++) {
-                    noticeMoreInformationDismiss[i].addEventListener('click', function(ev) {
-                        ev.preventDefault();
-                        noticeMoreInformation.style.opacity = 0;
-                        noticeMoreInformation.style.display = 'none';
-                    });
-                }
-                noticeSubmit.addEventListener('click', function(ev) {
-                    ev.preventDefault();
-                    login.style.display = 'block';
-                    notice.style.display = 'none';
-                });
-                /*]]>*/
-            </script>
         </div>
     </div>
-    <div class="island">
-        <p>
-            <a href="https://cloud.gov/docs/getting-started/accounts/">Learn about getting access to cloud.gov.</a>
-        </p>
+    <div id="cli-info" class="panel-container hidden">
+      <div class="island-content">
+        <div class="card-transparent notice">
+          <p>Developers can log in via the command line:</p>
+          <pre class="card code">cf login -a api.fr.cloud.gov  --sso</pre>
+          <a href="https://cloud.gov/docs/getting-started/setup/#quick-reference">See our documentation for login details</a>
+        </div>
+      </div>
     </div>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var login = document.querySelector('.js-full_login');
+        var notice = document.querySelector('.js-notice');
+        var noticeReadMore = document.querySelector('.js-notice-read_more');
+        var noticeSubmit = document.querySelector('.js-notice-submit');
+        var noticeMoreInformation = document.querySelector(
+            '.js-notice-more_information');
+        var noticeMoreInformationDismiss = document.querySelectorAll(
+            '.js-notice-more_information-dismiss');
+        login.style.display = 'none';
+        noticeReadMore.addEventListener('click', function(ev) {
+            ev.preventDefault();
+
+            noticeMoreInformation.style.display = 'block';
+            noticeMoreInformation.style.opacity = 100;
+        });
+        for (var i = 0; i < noticeMoreInformationDismiss.length; i++) {
+            noticeMoreInformationDismiss[i].addEventListener('click', function(ev) {
+                ev.preventDefault();
+                noticeMoreInformation.style.opacity = 0;
+                noticeMoreInformation.style.display = 'none';
+            });
+        }
+        noticeSubmit.addEventListener('click', function(ev) {
+            ev.preventDefault();
+            login.style.display = 'block';
+            notice.style.display = 'none';
+        });
+
+        (function(root) {
+          var cloudGovRegexp = new RegExp(/\.?cloud\.gov/);
+          var referrer = root.document.referrer;
+          var node = root.document.getElementById('cli-info');
+
+          if (cloudGovRegexp.test(referrer)) {
+            node.className = node.className.replace(/hidden/g, '');
+          }
+        })(window);
+        /*]]>*/
+    </script>
 </div>
 
 </html>

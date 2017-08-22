@@ -9081,12 +9081,23 @@ h1 {
 
 
 /* first pass on modal styles. Add here, then integrate with minimal overriding */
- 
+.card-transparent {
+  padding: 16px 24px;
+  background-color: transparent;
+}
+
+.card.code {
+  padding: 10.5px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  background: white;
+}
+
 .notice {
   text-align: left;
   color: #333;
 }
-    
+
 .modal-dialog {
   max-width: 32em;
 }
@@ -9100,7 +9111,7 @@ h1 {
 
 .modal-header {
   border-bottom: none;
-  padding: 24px 32px 0 16px; 
+  padding: 24px 32px 0 16px;
 }
 
 .modal-header .close {
@@ -9117,7 +9128,7 @@ h4.modal-title {
 }
 
 .modal-body {
-  padding: 16px; 
+  padding: 16px;
 }
 
 .modal-footer {
