@@ -6,3 +6,26 @@ set -e
 
 # Restart uaa to apply template overrides
 /var/vcap/bosh/bin/monit restart uaa
+
+wait_down() {
+  for _ in {1..36}; do
+    if ! curl -fk https://localhost:8443; then
+      return 0
+    fi
+    sleep 5
+  done
+  return 1
+}
+
+wait_up() {
+  for _ in {1..36}; do
+    if curl -fk https://localhost:8443; then
+      return 0
+    fi
+    sleep 5
+  done
+  return 1
+}
+
+wait_down
+wait_up
