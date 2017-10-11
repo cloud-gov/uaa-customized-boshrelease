@@ -1,4 +1,8 @@
 #!/bin/bash
 set -e
 
+# Recopy artifacts from /var/vcap/packages/uaa to /var/vcap/data/uaa
+/var/vcap/jobs/uaa/bin/pre-start
+
+# Restart uaa to apply template overrides
 /var/vcap/bosh/bin/monit restart uaa
