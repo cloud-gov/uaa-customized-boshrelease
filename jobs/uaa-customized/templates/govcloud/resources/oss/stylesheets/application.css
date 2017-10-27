@@ -8730,7 +8730,8 @@ input {
     margin-top: 24px;
     }
     .saml-login .saml-login-link {
-    font-weight: 600; }
+    font-weight: 600;
+    min-height: 45px;}
 
 .nav {
   position: relative;
