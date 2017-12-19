@@ -8,7 +8,7 @@ set -e
 /var/vcap/bosh/bin/monit restart uaa
 
 wait_down() {
-  for _ in {1..36}; do
+  for _ in {1..120}; do
     if ! curl -fk https://localhost:8443; then
       return 0
     fi
@@ -18,7 +18,7 @@ wait_down() {
 }
 
 wait_up() {
-  for _ in {1..36}; do
+  for _ in {1..120}; do
     if curl -fk https://localhost:8443; then
       return 0
     fi
