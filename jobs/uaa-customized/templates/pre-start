@@ -20,12 +20,12 @@ pushd "${WAR_TEMPDIR}"
   unzip "${WARFILE}" "${JARFILE}"
 
   mkdir -p templates/web
-  cp -a "${JOB_DIR}/web/* templates/web
+  cp -a "${JOB_DIR}"/web/* templates/web
   zip -r "${JARFILE}" templates/web
   zip "$WARFILE" "$JARFILE"
 
   mkdir resources
-  cp -a "${JOB_DIR}/resources/*" resources/
+  cp -a "${JOB_DIR}"/resources/* resources/
   zip -r "${WARFILE}" resources
 popd
 
