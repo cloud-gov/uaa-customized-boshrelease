@@ -8,29 +8,16 @@ templates:
   pre-start: bin/pre-start
   post-start: bin/post-start
 
-  govcloud/web/login.html: govcloud/web/login.html
-  govcloud/web/pw_validation.html: govcloud/web/pw_validation.html
-  govcloud/web/reset_password.html: govcloud/web/reset_password.html
-  govcloud/web/change_password.html: govcloud/web/change_password.html
-  govcloud/web/accounts/new_activation_email.html: govcloud/web/accounts/new_activation_email.html
-  govcloud/web/invitations/accept_invite.html: govcloud/web/invitations/accept_invite.html
-  govcloud/resources/oss/stylesheets/application.css: govcloud/resources/oss/stylesheets/application.css
-  govcloud/resources/javascripts/pw_validation.js: govcloud/resources/javascripts/pw_validation.js
-
-  east/web/login.html: east/web/login.html
-  east/web/pw_validation.html: east/web/pw_validation.html
-  east/web/reset_password.html: east/web/reset_password.html
-  east/web/change_password.html: east/web/change_password.html
-  east/web/accounts/new_activation_email.html: east/web/accounts/new_activation_email.html
-  east/web/invitations/accept_invite.html: east/web/invitations/accept_invite.html
-  east/resources/oss/stylesheets/application.css: east/resources/oss/stylesheets/application.css
-  east/resources/javascripts/pw_validation.js: east/resources/javascripts/pw_validation.js
+  web/login.html: web/login.html
+  web/pw_validation.html: web/pw_validation.html
+  web/reset_password.html: web/reset_password.html
+  web/change_password.html: web/change_password.html
+  web/accounts/new_activation_email.html: web/accounts/new_activation_email.html
+  web/invitations/accept_invite.html: web/invitations/accept_invite.html
+  resources/oss/stylesheets/application.css: resources/oss/stylesheets/application.css
+  resources/javascripts/pw_validation.js: resources/javascripts/pw_validation.js
 
 properties:
-  uaa-customized.template-directory:
-    description: "Custom template directory"
-    default: govcloud
-
   # Copied from https://github.com/cloudfoundry/uaa-release/blob/develop/jobs/uaa/spec
   uaa.password.policy.minLength:
     description: "Minimum number of characters required for password to be considered valid"
