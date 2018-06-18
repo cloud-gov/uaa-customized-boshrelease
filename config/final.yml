@@ -1,4 +1,4 @@
 ---
-name: uaa-customized
+final_name: uaa-customized
 blobstore:
     provider: s3
