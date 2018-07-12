@@ -4,49 +4,22 @@
 // the password as it is typed in. It then compares the password to the value
 // of the confirmation password.
 // This function is to be used in with the html from pw_validation.html
-function validatePassword(specialCount, uppercaseCount, lowercaseCount,
-                            numberCount, lengthCount, passwordField,
+function validatePassword(lengthCount, passwordField,
                             confirmPasswordField, submitButton) {
     // Set the values for the password policy requirements into the html.
-    document.getElementById("special-count").innerHTML=''+specialCount+'';
-    document.getElementById("uppercase-count").innerHTML=''+uppercaseCount+'';
-    document.getElementById("lowercase-count").innerHTML=''+lowercaseCount+'';
-    document.getElementById("number-count").innerHTML=''+numberCount+'';
     document.getElementById("length-count").innerHTML=''+lengthCount+'';
 
     // Set markers to dictate whether or not to check a particular rule. Default to true.
-    var specialCharsRule = true;
-    var uppercaseRule = true;
-    var lowercaseRule = true;
-    var digitsRule = true;
     var lengthRule = true;
 
     // Hide rules that aren't set or set to zero. Set the markers to false to indicate not to check them.
-    if ( specialCount === 0 ) {
-        $('#special-req').hide();
-        specialCharsRule = false;
-    }
-    if ( uppercaseCount === 0 ) {
-        $('#uppercase-req').hide();
-        uppercaseRule = false;
-    }
-    if ( lowercaseCount === 0 ) {
-        $('#lowercase-req').hide();
-        lowercaseRule = false;
-    }
-    if ( numberCount === 0 ) {
-        $('#number-req').hide();
-        digitsRule = false;
-    }
     if ( lengthCount === 0 ) {
         $('#length-req').hide();
         lengthRule = false;
     }
 
     // Create a simple boolean to check if no policy is set.
-    var noRules = ((specialCount === 0) && (uppercaseCount === 0) &&
-                    (lowercaseCount === 0) && (numberCount === 0) &&
-                    (lengthCount === 0));
+    var noRules = (lengthCount === 0);
     // If no policy, make sure it stays hidden.
     if (noRules == true) {$('#password-requirements').hide();}
 
@@ -96,19 +69,7 @@ function validatePassword(specialCount, uppercaseCount, lowercaseCount,
         // Validate the length of the password.
         var validLength = (lengthRule ? (validateField( ( pw.length < lengthCount ), '#length-req')) : true);
 
-        // Validate the number of special characters.
-        var validSpecialChars = (specialCharsRule ? (validateField(( ( pw.length - pw.replace( /[^0-9a-zA-Z]/g, '' ).length ) < specialCount ), '#special-req')) : true);
-
-        // Validate the number of lowercase letters
-        var validLowerChars = (lowercaseRule ? (validateField(( (pw.length - pw.replace(/[a-z]/g, '').length) < lowercaseCount ), '#lowercase-req')) : true);
-
-        // Validate the number of uppercase letters
-        var validUpperChars = (uppercaseRule ? (validateField(( (pw.length - pw.replace(/[A-Z]/g, '').length) < uppercaseCount ), '#uppercase-req')) : true);
-
-        // Validate the number of digits
-        var validDigits = (digitsRule ? (validateField(( (pw.length - pw.replace(/[0-9]/g, '').length) < numberCount ), '#number-req')) : true);
-
-        return validLength && validSpecialChars && validLowerChars && validUpperChars && validDigits;
+        return validLength;
     }
 
     // enableSubmitButton enables the submit button.
