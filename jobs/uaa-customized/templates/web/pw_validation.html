@@ -17,13 +17,8 @@
         $(document).ready(function(){
             // Get all the password policy requirements.
             // In case the policy equals to null, initialize the values to 0.
-            var specialCount = <%= p("uaa.password.policy.requireSpecialCharacter") %>;
-            var uppercaseCount = <%= p("uaa.password.policy.requireUpperCaseCharacter") %>;
-            var lowercaseCount = <%= p("uaa.password.policy.requireLowerCaseCharacter") %>;
-            var numberCount = <%= p("uaa.password.policy.requireDigit") %>;
             var lengthCount = <%= p("uaa.password.policy.minLength") %>;
-            validatePassword(specialCount, uppercaseCount, lowercaseCount,
-                              numberCount, lengthCount,
+            validatePassword(lengthCount,
                               /*[[${passwordField}]]*/,
                               /*[[${confirmPasswordField}]]*/,
                               /*[[${submitButton}]]*/
@@ -36,10 +31,6 @@
     <div id="password-requirements" class="password-req-box">
         <h5>Password must meet the following requirements:</h5>
         <ul class="list-unstyled" id="password-requirements-list">
-            <li id="special-req" class="text-danger">At least <strong><span id="special-count"></span> special letters</strong></li>
-            <li id="uppercase-req" class="text-danger">At least <strong><span id="uppercase-count"></span> uppercase letters</strong></li>
-            <li id="lowercase-req" class="text-danger">At least <strong><span id="lowercase-count"></span> lowercase letters</strong></li>
-            <li id="number-req" class="text-danger">At least <strong><span id="number-count"></span> numbers</strong></li>
             <li id="length-req" class="text-danger">At least <strong><span id="length-count"></span> characters long</strong></li>
         </ul>
     </div>
