@@ -1,3 +1,4 @@
+/* exported validatePassword */
 // validatePassword contains the logic for client side password validation.
 // It is passed in rule threshold information and then sets up watchers to check
 // the password as it is typed in. It then compares the password to the value
