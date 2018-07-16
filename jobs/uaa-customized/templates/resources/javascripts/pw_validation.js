@@ -58,6 +58,12 @@ function validatePassword(lengthCount, passwordField,
         return false;
     }
 
+    // Get the zxcvbn data and filter out only what we need
+    function zxcvbnData(pw) {
+        var zxcvbnResult = zxcvbn(pw)
+        return { score: zxcvbnResult.score, feedback: zxcvbnResult.feedback.warning }
+    }
+
     // validateFields returns whether or not all available fields are valid.
     function validateFields() {
         // If no rules, no need to do anything else.
@@ -69,7 +75,13 @@ function validatePassword(lengthCount, passwordField,
         // Validate the length of the password.
         var validLength = (lengthRule ? (validateField( ( pw.length < lengthCount ), '#length-req')) : true);
 
-        return validLength;
+        // if there is a warning, it will get put in zxcvbnResultId
+        var zxcvbnResult = zxcvbnData(pw)
+        var zxcvbnResultId = "#zxcvbn-req"
+        $(zxcvbnResultId).text(zxcvbnResult.feedback)
+        var validResult = validateField((zxcvbnResult.score < 3), zxcvbnResultId)
+
+        return validLength && validResult;
     }
 
     // enableSubmitButton enables the submit button.
