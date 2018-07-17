@@ -1,4 +1,5 @@
 /* exported validatePassword */
+/* global zxcvbn */
 // validatePassword contains the logic for client side password validation.
 // It is passed in rule threshold information and then sets up watchers to check
 // the password as it is typed in. It then compares the password to the value
@@ -59,9 +60,12 @@ function validatePassword(lengthCount, passwordField,
     }
 
     // Get the zxcvbn data and filter out only what we need
-    function zxcvbnData(pw) {
-        var zxcvbnResult = zxcvbn(pw)
-        return { score: zxcvbnResult.score, feedback: zxcvbnResult.feedback.warning }
+    function zxcvbnData(password) {
+        var zxcvbnResult = zxcvbn(password);
+        return {
+            score: zxcvbnResult.score,
+            feedback: zxcvbnResult.feedback.warning,
+        };
     }
 
     // validateFields returns whether or not all available fields are valid.
@@ -76,10 +80,10 @@ function validatePassword(lengthCount, passwordField,
         var validLength = (lengthRule ? (validateField( ( pw.length < lengthCount ), '#length-req')) : true);
 
         // if there is a warning, it will get put in zxcvbnResultId
-        var zxcvbnResult = zxcvbnData(pw)
-        var zxcvbnResultId = "#zxcvbn-req"
-        $(zxcvbnResultId).text(zxcvbnResult.feedback)
-        var validResult = validateField((zxcvbnResult.score < 3), zxcvbnResultId)
+        var zxcvbnResult = zxcvbnData(pw);
+        var zxcvbnResultId = "#zxcvbn-req";
+        $(zxcvbnResultId).text(zxcvbnResult.feedback);
+        var validResult = validateField((zxcvbnResult.score < 3), zxcvbnResultId);
 
         return validLength && validResult;
     }
