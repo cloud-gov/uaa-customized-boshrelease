@@ -14,6 +14,8 @@ templates:
   web/accounts/new_activation_email.html: web/accounts/new_activation_email.html
   web/invitations/accept_invite.html: web/invitations/accept_invite.html
   resources/oss/stylesheets/application.css: resources/oss/stylesheets/application.css
+  resources/oss/images/product-logo.png: resources/oss/images/product-logo.png
+  resources/oss/images/square-logo.png: resources/oss/images/square-logo.png
 
 properties:
   # Copied from https://github.com/cloudfoundry/uaa-release/blob/develop/jobs/uaa/spec
