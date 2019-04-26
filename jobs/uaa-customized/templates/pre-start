@@ -16,9 +16,6 @@ until [ -d /var/vcap/data/uaa/ ]; do
 done
 sleep 5
 
-# Allow for > 128bit encryption
-cp -a "${PACKAGES_DIR}"/jce-policy/UnlimitedJCEPolicyJDK8/*.jar "${PACKAGES_DIR}/uaa/jdk/jre/lib/security"
-
 WARFILE="${PACKAGES_DIR}/uaa/tomcat/webapps/ROOT.war"
 JARFILE=$(unzip -v "${WARFILE}" | grep cloudfoundry-identity-server- | awk '{print $8}')
 WAR_TEMPDIR="$(mktemp -d)"
@@ -26,12 +23,13 @@ WAR_TEMPDIR="$(mktemp -d)"
 pushd "${WAR_TEMPDIR}"
   unzip "${WARFILE}" "${JARFILE}"
 
-  mkdir -p templates/web
-  cp -a "${JOB_DIR}"/web/* templates/web
-  zip -r "${JARFILE}" templates/web
-  zip "$WARFILE" "$JARFILE"
+  # ignore templates for now
+  # mkdir -p templates/web
+  # cp -a "${JOB_DIR}"/web/* templates/web
+  # zip -r "${JARFILE}" templates/web
+  # zip "$WARFILE" "$JARFILE"
 
-  mkdir resources
+  mkdir -p resources
   cp -a "${JOB_DIR}"/resources/* resources/
   zip -r "${WARFILE}" resources
 popd

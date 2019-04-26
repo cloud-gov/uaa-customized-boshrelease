@@ -1,5 +1,34 @@
 @charset "UTF-8";
-@import url(//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700);
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Source Sans Pro Light'), local('SourceSansPro-Light'), url('../../font/sourcesanspro_light.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Source Sans Pro'), local('SourceSansPro-Regular'), url('../../font/sourcesanspro_regular.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Source Sans Pro Semibold'), local('SourceSansPro-Semibold'), url('../../font/sourcesanspro_semibold.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Source Sans Pro Bold'), local('SourceSansPro-Bold'), url('../../font/sourcesanspro_bold.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+
 /* ==========================================================================
   Browser support
   ========================================================================== */
@@ -35,12 +64,10 @@ audio:not([controls]) {
 template {
   display: none; }
 
-html {
-  font-family: sans-serif;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%; }
-
 body {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   margin: 0; }
 
 a {
@@ -190,7 +217,6 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
 
 body {
-  font-family: "Source Sans Pro", sans-serif;
   font-size: 15px;
   line-height: 1.5;
   color: #5d6e73;
@@ -280,9 +306,9 @@ cite {
   color: #d4d9da !important; }
 
 .text-primary {
-  color: #1b92cb; }
+  color: #005EA5; }
   .text-primary:hover {
-    color: #15729e; }
+    color: #006435; }
 
 .text-warning {
   color: #c1b293; }
@@ -315,7 +341,6 @@ cite {
 
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
-  font-family: "Source Sans Pro", sans-serif;
   font-weight: 400;
   line-height: 1.5;
   color: #34928a; }
@@ -1984,15 +2009,15 @@ output {
   vertical-align: middle;
   background-color: white;
   background-image: none;
-  border: 1px solid #cccccc;
-  border-radius: 3px;
+  border: 2px solid #0B0C0C;
+  border-radius: 0px;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s; }
   .form-control:focus {
-    border-color: #49a8d5;
-    outline: 0;
+    border-color: #0B0C0C;
+    outline: 3px solid #FFBF47;
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(73, 168, 213, 0.6);
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(73, 168, 213, 0.6); }
   .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
@@ -2223,7 +2248,7 @@ textarea.input-lg {
     outline: 5px auto -webkit-focus-ring-color;
     outline-offset: -2px; }
   .btn:hover, .island-button:hover, .forgot-password-button:hover, .btn:focus, .island-button:focus, .forgot-password-button:focus {
-    color: #333333;
+    color: #005EA5;
     text-decoration: none; }
   .btn:active, .island-button:active, .forgot-password-button:active, .btn.active, .active.island-button, .active.forgot-password-button {
     outline: 0;
@@ -3485,7 +3510,7 @@ button.close {
   margin-left: auto;
   margin-right: auto;
   width: auto;
-  padding-top: 240px;
+  padding: 10px;
   z-index: 1050; }
 
 .modal-content {
@@ -3553,7 +3578,7 @@ button.close {
 @media screen and (min-width: 768px) {
   .modal-dialog {
     width: 600px;
-    padding-top: 240px;
+    padding-top: 30px;
     padding-bottom: 30px; }
 
   .modal-content {
@@ -4866,31 +4891,34 @@ Do not use this button on normal application pages.
 */
 .btn-alternate, .island-button, .forgot-password-button {
   color: #eeeeee;
-  background-color: #1b92cb;
-  background: #2281bc;
-  box-shadow: 0 2px 0 #196084;
+  background-color: #00823B;
+  background: #00823B;
+  box-shadow: 0 2px 0 #003618;
   border: 0 0 2px 0;
   color: white;
-  font-weight: normal;
-  text-transform: none; }
+  font-weight: 300;
+  height: 90px;
+  text-transform: none;
+  padding: 15px 30px; }
   .btn-alternate:hover, .island-button:hover, .forgot-password-button:hover, .btn-alternate:focus, .island-button:focus, .forgot-password-button:focus, .btn-alternate:active, .island-button:active, .forgot-password-button:active, .btn-alternate.active, .active.island-button, .active.forgot-password-button {
     color: #eeeeee;
-    background-color: #1675a2; }
+    background-color: #006435; }
   .open .btn-alternate.dropdown-toggle, .open .dropdown-toggle.island-button, .open .dropdown-toggle.forgot-password-button {
     color: #eeeeee;
-    background-color: #1678a7; }
+    background-color: #006435; }
   .btn-alternate:active, .island-button:active, .forgot-password-button:active, .btn-alternate.active, .active.island-button, .active.forgot-password-button {
     background-image: none; }
   .open .btn-alternate.dropdown-toggle, .open .dropdown-toggle.island-button, .open .dropdown-toggle.forgot-password-button {
     background-image: none; }
   .btn-alternate.disabled, .disabled.island-button, .disabled.forgot-password-button, .btn-alternate.disabled:hover, .disabled.island-button:hover, .disabled.forgot-password-button:hover, .btn-alternate.disabled:focus, .disabled.island-button:focus, .disabled.forgot-password-button:focus, .btn-alternate.disabled:active, .disabled.island-button:active, .disabled.forgot-password-button:active, .btn-alternate.disabled.active, .disabled.active.island-button, .disabled.active.forgot-password-button, .btn-alternate[disabled], [disabled].island-button, [disabled].forgot-password-button, .btn-alternate[disabled]:hover, [disabled].island-button:hover, [disabled].forgot-password-button:hover, .btn-alternate[disabled]:focus, [disabled].island-button:focus, [disabled].forgot-password-button:focus, .btn-alternate[disabled]:active, [disabled].island-button:active, [disabled].forgot-password-button:active, .btn-alternate[disabled].active, [disabled].active.island-button, [disabled].active.forgot-password-button, fieldset[disabled] .btn-alternate, fieldset[disabled] .island-button, fieldset[disabled] .forgot-password-button, fieldset[disabled] .btn-alternate:hover, fieldset[disabled] .island-button:hover, fieldset[disabled] .forgot-password-button:hover, fieldset[disabled] .btn-alternate:focus, fieldset[disabled] .island-button:focus, fieldset[disabled] .forgot-password-button:focus, fieldset[disabled] .btn-alternate:active, fieldset[disabled] .island-button:active, fieldset[disabled] .forgot-password-button:active, fieldset[disabled] .btn-alternate.active, fieldset[disabled] .active.island-button, fieldset[disabled] .active.forgot-password-button {
-    background-color: #1b92cb; }
+    background-color: #196084; }
 
 .btn-lg, .btn-group-lg > .btn, .btn-group-lg > .island-button, .btn-group-lg > .forgot-password-button, .island-button, .forgot-password-button {
-  padding: 10px 26px;
-  font-size: 18px;
-  line-height: 1.33;
-  border-radius: 3px; }
+  padding: 15px 30px;
+  font-size: 19px;
+  line-height: 1.5;
+  border-radius: 0px; }
+
 
 /*doc
 ---
@@ -5520,7 +5548,6 @@ category: Base CSS
 .box .boxHeadBranded {
   background: #64aea8;
   text-transform: uppercase;
-  font-family: "freight-sans-pro", sans-serif;
   font-weight: 300;
   font-size: 24px;
   color: #eee;
@@ -6137,7 +6164,6 @@ html, body {
   padding: 0;
   margin: 0;
   height: 100%;
-  overflow: auto;
   font-size: 15px; }
 
 .page-wrapper {
@@ -7693,7 +7719,7 @@ Modals do something worthwhile....
 
 /*doc
 ---
-title: `s
+title: Banners
 name: banner
 category: Base CSS
 ---
@@ -7711,22 +7737,43 @@ in other contexts.
 */
 .banner {
   background: #a81500;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #a81500 0%, #9b1200 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #a81500), color-stop(100%, #9b1200));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #a81500 0%, #9b1200 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -ms-linear-gradient(top, #a81500 0%, #9b1200 100%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, #a81500 0%, #9b1200 100%);
+  /* W3C */
   color: white;
   padding: 5px 55px;
   text-align: center;
   font-size: 16px;
   font-weight: 200;
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-}
-
-.banner.alert-error {
-	border: none;
-	text-align: center;
-}
+  box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.2);
+  top: 109px;
+  left: -23px;
+  -webkit-transform-origin: 0 0;
+  -moz-transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  -o-transform-origin: 0 0;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  z-index: 10000; }
+  .banner:before {
+    content: "";
+    top: 2px;
+    bottom: 2px;
+    right: 2px;
+    left: 2px;
+    position: absolute;
+    border: 1px dashed #c07074; }
 
 /*doc
 ---
@@ -8545,8 +8592,8 @@ body {
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: contain;
-  height: 125px;
-  width: 280px;
+  height: 150px;
+  width: 440px;
   margin: auto;
 }
 
@@ -8554,26 +8601,24 @@ body {
     min-height: 100%;
     height: auto !important;
     height: 100%;
-    margin: 0 auto -48px;
+    margin: 0 auto -40px;
     padding-top: 16px; }
 
 .footer, .footer-spacer {
-  height: 48px; }
+  height: 40px; }
 
 .footer {
   text-align: center;
-  color: #9faaad;
-  margin-top: 0;
-  font-size: 12px;
-  padding-top: 16px;}
+  color: #6F777B;
+  font-size: 14px; }
 
 h1 {
-  font-size: 32px;
-  font-weight: 300;
-  line-height: 1em;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 40px;
   text-transform: none;
   margin-top: 0;
-  margin-bottom: 16px; }
+  margin-bottom: 30px; }
 
 h2 {
   font-size: 24px;
@@ -8584,18 +8629,19 @@ h2 {
   position: relative;
   text-align: center; }
 .island .island-content {
-  margin: 0 auto;
-  width: 100%;
-  padding: 0 16px;
-  max-width: 400px;
+  width: 440px;
+  margin: 0 auto; }
+
+.island .island-content .alert {
+  text-align: center;
 }
 
 .island-landscape {
-  border: 1px solid #e0e4e5;
+  /*border: 1px solid #e0e4e5;*/
   margin-left: auto;
   margin-right: auto;
   max-width: 700px;
-  padding: 40px;
+  padding: 15px;
   position: relative;
   width: 88%; }
 
@@ -8607,16 +8653,21 @@ h2 {
 .island-landscape:after {
   clear: both; }
 .island-landscape .island-title {
-  float: left;
-  width: 300px; }
+  /*float: left;*/
+  width: 440px;
+  margin: 0 auto 40px; }
 .island-landscape .island-title p {
-  font-weight: 300; }
+  font-weight: 400;
+  color: red;
+}
 .island-landscape .island-title p strong {
   font-weight: 400; }
 .island-landscape .island-content {
-  float: right;
-  width: 230px;
-  margin: 0 auto; }
+  /*float: right;*/
+  width: 440px;
+  margin: 0 auto;
+  color: red;
+}
 .island-landscape .island-content .fa-envelope-o {
   float: left;
   font-size: 42px;
@@ -8627,7 +8678,7 @@ h2 {
 .island-landscape .island-content .island-button, .island-landscape .island-content .forgot-password-button {
   clear: both; }
 .island, .island-landscape {
-    margin-top: 17px; }
+    margin-top: 30px; }
 
 @media (max-width: 720px) {
 .island-landscape {
@@ -8644,16 +8695,15 @@ h2 {
   right: 0; }
 
 form {
-  margin-bottom: 8px; }
+  margin-bottom: 30px; }
 
 input {
   display: block;
-  margin-bottom: 16px; }
+  margin-bottom: 30px; }
 
 .form-control {
   font-size: 16px;
-  height: 36px;
-  color: #2281BC;
+  height: 40px;
   line-height: 1; }
 
 ::-webkit-input-placeholder {
@@ -8687,9 +8737,9 @@ input {
   font-weight: 300; }
 
 .email-display {
-  color: #43575c;
+  color: #0B0C0C;
   font-size: 16px;
-  margin-bottom: 16px; }
+  margin-bottom: 30px; }
 
 .left {
   display: inline-block;
@@ -8715,23 +8765,17 @@ input {
   line-height: 12px;
   margin-bottom: 20px; }
 
-.card {
-    padding: 16px 24px;
-    border: 1px solid #eee;
-    border-radius: 8px;
-    background-color: white;
-}
-
 .saml-login {
-    color: #cccccc;
-    font-size: 11px;
-    line-height: 18px;
-    margin-bottom: 16px;
-    margin-top: 24px;
-    }
-    .saml-login .saml-login-link {
-    font-weight: 600;
-    min-height: 45px;}
+  border-bottom: 1px solid #cccccc;
+  color: #cccccc;
+  font-size: 11px;
+  line-height: 18px;
+  margin-bottom: 10px;
+  padding: 10px 0; }
+  .saml-login .saml-login-link {
+    font-weight: 700; }
+  .saml-login p {
+    color: #7f7f7f; }
 
 .nav {
   position: relative;
@@ -8882,21 +8926,17 @@ input {
   font-size: 18px; }
 
 .island-button, .forgot-password-button {
-  text-transform: uppercase;
-  font-size: 14px;
-  height: 34px;
+  /*text-transform: uppercase;*/
+  font-size: 19px;
+  height: 40px;
   padding: 0;
-  line-height: 14px; }
+  line-height: 19px; }
   .island-button[disabled], [disabled].forgot-password-button {
     background-color: white;
     border-width: 1px 2px 2px 1px;
     border-color: rgba(0, 0, 0, 0.16);
-    color: #7f7f7f;
+    color: #005EA5;
     opacity: 1; }
-
-.island-button.disabled {
-	background-color: #ddd;
-}
 
 .forgot-password-button {
   letter-spacing: 0; }
@@ -8929,12 +8969,11 @@ input {
 
 .alert {
   font-weight: 600;
-  padding: 8px;
-  margin-bottom: 16px;
+  padding: 15px;
+  margin-bottom: 50px;
   border: 1px solid transparent;
   border-radius: 0px;
   font-size: 13px;
-  line-height: 18px;
   text-align: left; }
 
 .alert-success {
@@ -8943,7 +8982,7 @@ input {
 
 .alert-error {
   background-color: #febfc1;
-  border-color: #ab2a2a;
+  border-color: #febfc1;
   color: #ab2a2a; }
 
 .alert p:before {
@@ -8958,182 +8997,12 @@ input {
   content: '\f071'; }
 
 h1 {
-  color: #424242; }
+  color: #0B0C0C;
+  font-weight: 400;
+}
 
 .header {
   height: 125px; }
 
 .panel-container {
   margin-top: 32px; }
-
-.password-req-box {
-  position: relative;
-  width: 100%;
-  background: #fefefe;
-  font-size: .875em;
-  border-radius: 5px;
-  box-shadow:0 1px 3px #ccc;
-  border:1px solid #ddd;
-  margin-bottom: 15px;
-  display: none;
-  text-align: center;
-}
-
-.password-req-box::before {
-  content: "\25B2";
-  position:absolute;
-  top:-12px;
-  left:45%;
-  font-size:14px;
-  line-height:14px;
-  color:#ddd;
-  text-shadow:none;
-  display:block;
-}
-
-/* new signin styles */
-
-.btn--block {
-	font-weight: 700;
-    display: block;
-    border: 2px solid;
-    border-radius: 4px;
-    margin-bottom: 4px;
-}
-
-.btn--m {
-    font-size: 14px;
-    padding: 8px;
-}
-
-.btn--block.color-blue {
-	color: #2281BC;
-}
-
-.btn--block.color-blue:hover,
-.btn--block.color-blue:focus {
-	color: #196084;
-}
-
-.btn--block.color-blue:active {
-	color: #f8f8f8;
-	background-color: #196084;
-	border-color: #196084;
-}
-
-.container.offset-0 {
-	padding-left: 0;
-	padding-right: 0;
-}
-
-.row.offset-4 {
-	margin-left: -4px;
-	margin-right: -4px;
-}
-
-.col.offset-4 {
-	padding-left: 4px;
-	padding-right: 4px;
-}
-
-.h3-primary,
-.h3-secondary {
-    font-size: 16px;
-    margin-top: 0;
-    font-weight: 300;
-	line-height: 1.25;
-}
-
-.h3-primary {
-    color: #2281bc;
-}
-
-.h3-secondary {
-	color: #999;
-	margin-bottom: 18px;
-}
-
-.badge--inline {
-    display: inline-block;
-    width: 24px;
-    vertical-align: middle;
-    margin-right: 8px;
-    border-radius: 2px;
-}
-
-.h6-alt {
-	color: #999;
-    margin-top: 12px;
-    margin-bottom: 18px;
-    font-size: 12px;
-    line-height: 1.25;
-    text-transform: uppercase;
-    text-align: center;
-}
-
-.hidden { display: none; }
-.copyright {
-	font-size: 10px;
-}
-
-.nobr {
-	white-space: nowrap;
-}
-
-
-/* first pass on modal styles. Add here, then integrate with minimal overriding */
-.card-transparent {
-  padding: 16px 24px;
-  background-color: transparent;
-}
-
-.card.code {
-  padding: 10.5px;
-  border-radius: 8px;
-  border: 1px solid #eee;
-  background: white;
-}
-
-.notice {
-  text-align: left;
-  color: #333;
-}
-
-.modal-dialog {
-  max-width: 32em;
-}
-
-.modal-content {
-  border: 1px solid;
-  box-shadow: 0 0px 0px 4px rgba(0, 0, 0, 0.1);
-  color: #333;
-  text-align: left;
-}
-
-.modal-header {
-  border-bottom: none;
-  padding: 24px 32px 0 16px;
-}
-
-.modal-header .close {
-  margin-top: -16px;
-  margin-right: -16px;
-  font-weight: 200;
-  font-size: 32px;
-}
-
-h4.modal-title {
-  line-height: 1.2;
-  color: #333;
-  font-weight: 600;
-}
-
-.modal-body {
-  padding: 16px;
-}
-
-.modal-footer {
-  margin-top: 0;
-  padding: 0 16px 16px 16px;
-  border-top: none;
-}

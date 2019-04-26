@@ -2,21 +2,14 @@
 name: uaa-customized
 
 packages:
-- jce-policy
 
 templates:
   pre-start: bin/pre-start
   post-start: bin/post-start
 
-  web/login.html: web/login.html
-  web/pw_validation.html: web/pw_validation.html
-  web/reset_password.html: web/reset_password.html
-  web/change_password.html: web/change_password.html
-  web/accounts/new_activation_email.html: web/accounts/new_activation_email.html
-  web/invitations/accept_invite.html: web/invitations/accept_invite.html
   resources/oss/stylesheets/application.css: resources/oss/stylesheets/application.css
-  resources/javascripts/pw_validation.js: resources/javascripts/pw_validation.js
-  resources/javascripts/vendor/zxcvbn.js: resources/javascripts/vendor/zxcvbn.js
+  resources/oss/images/product-logo.png: resources/oss/images/product-logo.png
+  resources/oss/images/square-logo.png: resources/oss/images/square-logo.png
 
 properties:
   # Copied from https://github.com/cloudfoundry/uaa-release/blob/develop/jobs/uaa/spec
