@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -eu
+
+status_file='/var/vcap/jobs/uaa-customized/status'
+
+# If status file does not exist then not yet ready to serve
+if ! [ -e "$status_file" ]; then
+  exit 1
+fi
+
+# If contents of status file is not 'up' then not yet ready to serve
+if [ "$( < "$status_file" )" != "up" ]; then
+  exit 1
+fi
+
+uaa_url="https://127.0.0.1:8443/healthz"
+resp="$(curl -ksS -m 5 --connect-timeout 2 "$uaa_url")"
+
+if [ "$resp" = "ok" ]; then
+  exit 0
+fi
+
+exit 1

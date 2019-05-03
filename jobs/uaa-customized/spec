@@ -6,6 +6,7 @@ packages:
 templates:
   pre-start: bin/pre-start
   post-start: bin/post-start
+  bin/health_check: bin/health_check
 
   resources/oss/stylesheets/application.css: resources/oss/stylesheets/application.css
   resources/oss/images/product-logo.png: resources/oss/images/product-logo.png
