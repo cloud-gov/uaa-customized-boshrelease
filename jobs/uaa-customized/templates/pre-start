@@ -1,37 +1,4 @@
 #!/bin/bash
 set -e
 
-##########. WARNING. #################
-## This is a hack. plain and simple.
-## Do not try this at home.
-######################################
-
-PACKAGES_DIR=/var/vcap/packages
-JOB_DIR=/var/vcap/jobs/uaa-customized
-
-# Wait until UAA pre-start has finished copying files from packages to avoid
-# race condition between pre-start scripts
-until [ -d /var/vcap/data/uaa/ ]; do
-  sleep 1
-done
-sleep 5
-
-WARFILE="${PACKAGES_DIR}/uaa/tomcat/webapps/ROOT.war"
-JARFILE=$(unzip -v "${WARFILE}" | grep cloudfoundry-identity-server- | awk '{print $8}')
-WAR_TEMPDIR="$(mktemp -d)"
-
-pushd "${WAR_TEMPDIR}"
-  unzip "${WARFILE}" "${JARFILE}"
-
-  # ignore templates for now
-  # mkdir -p templates/web
-  # cp -a "${JOB_DIR}"/web/* templates/web
-  # zip -r "${JARFILE}" templates/web
-  # zip "$WARFILE" "$JARFILE"
-
-  mkdir -p resources
-  cp -a "${JOB_DIR}"/resources/* resources/
-  zip -r "${WARFILE}" resources
-popd
-
-rm -rf "${WAR_TEMPDIR}"
+echo 'down' > /var/vcap/jobs/uaa-customized/status
