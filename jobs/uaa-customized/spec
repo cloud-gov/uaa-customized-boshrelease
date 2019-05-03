@@ -11,20 +11,4 @@ templates:
   resources/oss/images/product-logo.png: resources/oss/images/product-logo.png
   resources/oss/images/square-logo.png: resources/oss/images/square-logo.png
 
-properties:
-  # Copied from https://github.com/cloudfoundry/uaa-release/blob/develop/jobs/uaa/spec
-  uaa.password.policy.minLength:
-    description: "Minimum number of characters required for password to be considered valid"
-    default: 0
-  uaa.password.policy.requireUpperCaseCharacter:
-    description: "Minimum number of uppercase characters required for password to be considered valid"
-    default: 0
-  uaa.password.policy.requireLowerCaseCharacter:
-    description: "Minimum number of lowercase characters required for password to be considered valid"
-    default: 0
-  uaa.password.policy.requireDigit:
-    description: "Minimum number of digits required for password to be considered valid"
-    default: 0
-  uaa.password.policy.requireSpecialCharacter:
-    description: "Minimum number of special characters required for password to be considered valid"
-    default: 0
+properties: {}
