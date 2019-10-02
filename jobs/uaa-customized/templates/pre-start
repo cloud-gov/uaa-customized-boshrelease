@@ -16,8 +16,8 @@ until [ -d /var/vcap/data/uaa/ ]; do
 done
 sleep 5
 
-# Allow for > 128bit encryption
-cp -a "${PACKAGES_DIR}"/jce-policy/UnlimitedJCEPolicyJDK8/*.jar "${PACKAGES_DIR}/uaa/jdk/jre/lib/security"
+#jdk 9 and greater ship with Unlimited policy as default: 
+#https://www.oracle.com/technetwork/java/javase/downloads/jce-all-download-5170447.html
 
 WARFILE="${PACKAGES_DIR}/uaa/tomcat/webapps/ROOT.war"
 JARFILE=$(unzip -v "${WARFILE}" | grep cloudfoundry-identity-server- | awk '{print $8}')
