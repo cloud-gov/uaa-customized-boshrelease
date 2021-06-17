@@ -8,7 +8,7 @@
 function validatePassword(lengthCount, passwordField,
                             confirmPasswordField, submitButton) {
     // Set the values for the password policy requirements into the html.
-    document.getElementById("length-count").innerHTML=''+lengthCount+'';
+    document.getElementById("length-count").innerText=''+lengthCount+'';
 
     // Set markers to dictate whether or not to check a particular rule. Default to true.
     var lengthRule = true;
@@ -52,10 +52,10 @@ function validatePassword(lengthCount, passwordField,
         // Get the confirm password value.
         var confirmPw = $("input[type='password'][name='" + confirmPasswordField + "']").val();
         if (pw === confirmPw) {
-            document.getElementById("match-passwords").innerHTML='DO';
+            document.getElementById("match-passwords").innerText='DO';
             return true;
         }
-        document.getElementById("match-passwords").innerHTML='DO NOT';
+        document.getElementById("match-passwords").innerText='DO NOT';
         return false;
     }
 
