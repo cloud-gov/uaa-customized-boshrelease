@@ -55,9 +55,9 @@
                             </a>
                             <!-- button fills the full width of the column -->
                         </div>
-                        <div th:each="oauthLink : ${oauthLinks}" >
+                        <div th:each="oauthLink : ${oauthLinks}" class="col col-xs-12 offset-4" >
                             <div>
-                                <a href="" th:href="${oauthLink.key}" th:text="${oauthLink.value}" class="saml-login-link btn--block">Use your corporate credentials</a>
+                                <a href="" th:href="${oauthLink.key}" th:text="${oauthLink.value}" class="saml-login-link btn--block btn--m color-blue text-left"><span th:text="${oauthLink.value}" class="txt-m"></span>Use your corporate credentials</a>
                             </div>
                         </div>
                     </div>
