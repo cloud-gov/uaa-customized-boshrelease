@@ -18,7 +18,7 @@ templates:
   resources/javascripts/pw_validation.js: resources/javascripts/pw_validation.js
   resources/javascripts/vendor/zxcvbn.js: resources/javascripts/vendor/zxcvbn.js
   resources/javascripts/display_notice.js: resources/javascripts/display_notice.js
-  resources/javascripts/pw_requirements.js: resources/javascripts/pw_requiremnts.js
+  resources/javascripts/pw_requirements.js: resources/javascripts/pw_requirements.js
 
 properties:
   # Copied from https://github.com/cloudfoundry/uaa-release/blob/develop/jobs/uaa/spec
