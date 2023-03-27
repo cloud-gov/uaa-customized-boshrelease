@@ -13,20 +13,7 @@
     </th:block>
 </head>
 <th:block layout:fragment="pw-validate(passwordField, confirmPasswordField, submitButton)">
-    <script th:inline="javascript">
-        /*<![CDATA[*/
-        $(document).ready(function(){
-            // Get all the password policy requirements.
-            // In case the policy equals to null, initialize the values to 0.
-            var lengthCount = <%= p("uaa.password.policy.minLength") %>;
-            validatePassword(lengthCount,
-                              /*[[${passwordField}]]*/,
-                              /*[[${confirmPasswordField}]]*/,
-                              /*[[${submitButton}]]*/
-                            );
-        });
-        /*]]>*/
-    </script>
+    <script type="text/javascript" src="/resources/javascripts/pw_requirements.js" th:src="@{'/resources/javascripts/pw_requirements.js'}"></script>
 </th:block>
 <th:block layout:fragment="pw-requirements">
     <div id="password-requirements" class="password-req-box">
