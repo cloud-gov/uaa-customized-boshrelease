@@ -3,8 +3,8 @@ $(document).ready(function(){
     // In case the policy equals to null, initialize the values to 0.
     var lengthCount = <%= p("uaa.password.policy.minLength") %>;
     validatePassword(lengthCount,
-                      /*[[${passwordField}]]*/,
-                      /*[[${confirmPasswordField}]]*/,
-                      /*[[${submitButton}]]*/
+                      passwordField,
+                      confirmPasswordField,
+                      submitButton
                     );
 });
