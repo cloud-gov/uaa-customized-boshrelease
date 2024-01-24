@@ -9006,6 +9006,11 @@ h1 {
     padding: 8px;
 }
 
+.btn--l {
+    font-size: 18px;
+    padding: 10px;
+}
+
 .btn--block.color-blue {
 	color: #2281BC;
 }
@@ -9038,9 +9043,9 @@ h1 {
 
 .h3-primary,
 .h3-secondary {
-    font-size: 16px;
-    margin-top: 0;
-    font-weight: 300;
+  font-size: 16px;
+  margin-top: 0;
+  font-weight: 600;
 	line-height: 1.25;
 }
 
@@ -9059,6 +9064,10 @@ h1 {
     vertical-align: middle;
     margin-right: 8px;
     border-radius: 2px;
+}
+
+.btn--l .badge--inline {
+  width: 32px;
 }
 
 .h6-alt {
