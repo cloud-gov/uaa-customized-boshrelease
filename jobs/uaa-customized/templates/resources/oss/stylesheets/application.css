@@ -9023,14 +9023,14 @@ h1 {
 .btn--block.color-blue:hover,
 .btn--block.color-blue:focus {
 	border-color: #196084;
-	color: #3c3c3a;
+	color: #000000;
   text-decoration: none;
   background-color: #ecf8fe;
 }
 
 .btn--block.color-blue:active {
 	color: #f8f8f8;
-	background-color: #196084;
+	background-color: #000;
 	border-color: #196084;
 }
 

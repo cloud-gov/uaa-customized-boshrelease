@@ -51,7 +51,7 @@
                 >
                     <div class="row offset-4">
                         <div class="col col-xs-24 offset-4">
-                            <h2 class="h2-primary mbxl mts">
+                            <h2 class="h2-black mbxl mts">
                                 Choose your sign-in method
                             </h2>
                         </div>
@@ -70,7 +70,7 @@
                                 >
                                 <img src="" 
                                     th:src="${idp.iconUrl}" 
-                                    class="badge--inline txt-m" 
+                                    class="badge--inline txt-m mls mrm" 
                                     alt="cloud.gov icon" 
                                 />
                                 <span class="txt-m">Sign in with cloud.gov</span>
@@ -83,7 +83,7 @@
                     <div class="row offset-4">
                         <div class="col col-xs-24 offset-4">
                             <h3 class="h3-black ptxl pbl">
-                                Or use your agency credentials
+                                Or use your agency credentials:
                             </h3>
                         </div>
                     </div>
@@ -102,14 +102,14 @@
                                 <img src="" 
                                     th:src="${idp.iconUrl}" 
                                     class="badge--inline txt-m" 
-                                    alt="${idp.linkText}" 
+                                    th:alt="${idp.linkText}" 
                                 />
                                 <span th:text="${idp.linkText}" class="txt-m">
                                     Use your corporate credentials
                                 </span>
                             </a>
                         </div>
-                        <div th:each="oauthLink : ${oauthLinks}" class="col col-xs-12 offset-4" >
+                        <div th:each="oauthLink : ${oauthLinks}" class="col col-xs-12 offset-4">
                             <!-- OAuth -->
                             <a href="" 
                                 th:href="${oauthLink.key}" 
