@@ -51,7 +51,7 @@
                 <div class="card saml-login">
                     <div class="row offset-4">
                         <!-- sets up a row w/ a 4px offest -->
-                        <div th:each="idp : ${idpDefinitions}" th:if="${idp.showSamlLink} and ${idp.idpEntityAlias === 'cloud.gov'}" class="col col-xs-12 offset-4">
+                        <div th:each="idp : ${idpDefinitions}" th:if="${idp.showSamlLink and idp.idpEntityAlias === 'cloud.gov'}" class="col col-xs-12 offset-4">
                             <!-- sets up half-width column for the button -->
                             <a href="" th:href="@{saml/discovery(returnIDParam=idp,entityID=${entityID},idp=${idp.idpEntityAlias},isPassive=true)}" class="saml-login-link btn--block btn--m color-blue text-left"><img src="" th:src="${idp.iconUrl}" class="badge--inline txt-m" alt="${idp.linkText}" /><span th:text="${idp.linkText}" class="txt-m">Use your corporate credentials</span>
                             </a>
@@ -67,7 +67,7 @@
 
                     <div class="row offset-4">
                         <!-- sets up a row w/ a 4px offest -->
-                        <div th:each="idp : ${idpDefinitions}" th:if="${idp.showSamlLink} and ${idp.idpEntityAlias !== 'cloud.gov'}" class="col col-xs-12 offset-4">
+                        <div th:each="idp : ${idpDefinitions}" th:if="${idp.showSamlLink and idp.idpEntityAlias !== 'cloud.gov'}" class="col col-xs-12 offset-4">
                             <!-- sets up half-width column for the button -->
                             <a href="" th:href="@{saml/discovery(returnIDParam=idp,entityID=${entityID},idp=${idp.idpEntityAlias},isPassive=true)}" class="saml-login-link btn--block btn--m color-blue text-left"><img src="" th:src="${idp.iconUrl}" class="badge--inline txt-m" alt="${idp.linkText}" /><span th:text="${idp.linkText}" class="txt-m">Use your corporate credentials</span>
                             </a>
