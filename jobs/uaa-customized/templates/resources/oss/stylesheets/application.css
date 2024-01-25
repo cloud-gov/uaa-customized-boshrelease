@@ -8729,9 +8729,13 @@ input {
     margin-bottom: 16px;
     margin-top: 24px;
     }
-    .saml-login .saml-login-link {
+.saml-login .saml-login-link {
     font-weight: 600;
-    min-height: 45px;}
+    min-height: 45px;
+}
+.saml-login .saml-login-link.btn--m {
+    font-size: 16px;
+}
 
 .nav {
   position: relative;
@@ -9006,18 +9010,27 @@ h1 {
     padding: 8px;
 }
 
+.btn--l {
+    font-size: 18px;
+    padding: 10px;
+}
+
 .btn--block.color-blue {
-	color: #2281BC;
+	border-color: #2281BC;
+  color: #171716;
 }
 
 .btn--block.color-blue:hover,
 .btn--block.color-blue:focus {
-	color: #196084;
+	border-color: #196084;
+	color: #000000;
+  text-decoration: none;
+  background-color: #ecf8fe;
 }
 
 .btn--block.color-blue:active {
 	color: #f8f8f8;
-	background-color: #196084;
+	background-color: #000;
 	border-color: #196084;
 }
 
@@ -9036,12 +9049,28 @@ h1 {
 	padding-right: 4px;
 }
 
+.h2-black, 
+.h2-primary,
+.h2-secondary {
+  font-size: 22px;
+  margin-top: 0;
+  font-weight: 500;
+	line-height: 1.25;
+  color: #171716;
+}
+
+.h2-primary {
+    color: #2281bc;
+}
+
+.h3-black,
 .h3-primary,
 .h3-secondary {
-    font-size: 16px;
-    margin-top: 0;
-    font-weight: 300;
+  font-size: 16px;
+  margin-top: 0;
+  font-weight: 500;
 	line-height: 1.25;
+  color: #171716;
 }
 
 .h3-primary {
@@ -9061,6 +9090,10 @@ h1 {
     border-radius: 2px;
 }
 
+.btn--l .badge--inline {
+  width: 32px;
+}
+
 .h6-alt {
 	color: #999;
     margin-top: 12px;
@@ -9072,6 +9105,13 @@ h1 {
 }
 
 .hidden { display: none; }
+
+.visually-hidden {
+  position: absolute;
+  left: -999em;
+  right: auto;
+}
+
 .copyright {
 	font-size: 10px;
 }
