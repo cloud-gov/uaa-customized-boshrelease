@@ -1,9 +1,6 @@
 ---
 name: uaa-customized
 
-packages:
-- jce-policy
-
 templates:
   pre-start: bin/pre-start
   post-start: bin/post-start

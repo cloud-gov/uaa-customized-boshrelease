@@ -1,5 +1,0 @@
----
-name: jce-policy
-
-files:
-- openjdk/jce-policy-8.zip
