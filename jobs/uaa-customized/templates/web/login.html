@@ -77,8 +77,7 @@
                             th:if="${idp.showSamlLink and idp.idpEntityAlias == 'cloud.gov'}"
                             class="col col-xs-20 col-xs-push-2 offset-4">
                             <!-- Cloud.gov IDP -->
-                            <a href=""
-                                th:href="@{saml/discovery(returnIDParam=idp,entityID=${entityID},idp=${idp.idpEntityAlias},isPassive=true)}"
+                            <a href="" th:href="@{saml2/authenticate/{entityAlias}(entityAlias=${idp.idpEntityAlias})}"
                                 class="saml-login-link btn--block btn--l color-blue text-left">
                                 <img src="" th:src="${idp.iconUrl}" class="badge--inline txt-m mls mrm"
                                     alt="cloud.gov icon" />
