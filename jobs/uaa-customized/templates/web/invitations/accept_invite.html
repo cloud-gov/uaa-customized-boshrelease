@@ -22,6 +22,7 @@
         <th:block th:unless="${error_message_code == 'code_expired'}" >
           <th:block th:if="${provider == 'uaa'}">
             <form action="/invitations/accept.do" method="post" novalidate="novalidate">
+                <input type="hidden" th:value="${#cookies.X-Uaa-Csrf?.value}" name="X-Uaa-Csrf" />
                 <input name="code" type="hidden" value="code" th:value="${code}"/>
                 <input name="password" type="password" placeholder="Password" autocomplete="off" class="form-control"/>
                 <th:block layout:include="pw_validation :: pw-requirements"></th:block>
