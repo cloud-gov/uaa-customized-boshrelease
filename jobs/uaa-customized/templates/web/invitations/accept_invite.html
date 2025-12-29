@@ -3,19 +3,11 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/main}" >
 <head>
-    <!-- Some pages already have JQuery, when they do not, import this too -->
-    <th:block layout:fragment="deps">
-        <script type="text/javascript" src="/vendor/jquery/javascripts/jquery.js" th:src="@{'/vendor/jquery/javascripts/jquery.js'}"></script>
-    </th:block>
-    <th:block layout:fragment="head">
-        <script type="text/javascript" src="/resources/javascripts/vendor/zxcvbn.js" th:src="@{'/resources/javascripts/vendor/zxcvbn.js'}"></script>
-        <script type="text/javascript" src="/resources/javascripts/pw_validation.js" th:src="@{'/resources/javascripts/pw_validation.js'}"></script>
-    </th:block>
+    <th:block layout:include="pw_validation :: deps"></th:block>
+    <th:block layout:include="pw_validation :: head"></th:block>
 </head>
 <div class="island-landscape" layout:fragment="page-content">
-    <th:block layout:fragment="pw-validate(passwordField, confirmPasswordField, submitButton)">
-        <script type="text/javascript" src="/resources/javascripts/pw_requirements.js" th:src="@{'/resources/javascripts/pw_requirements.js'}"></script>
-    </th:block>
+    <th:block layout:include="pw_validation :: pw-validate('password', 'password_confirmation', 'submit')"></th:block>
     <div class="island-title">
         <h1><th:block th:unless="${provider=='ldap'}">Create</th:block><th:block th:if="${provider=='ldap'}">Link</th:block> your <th:block th:text="${!companyName.equals('Cloud Foundry') and isUaa ? (companyName + ' account') : 'account'}">account</th:block></h1>
     </div>
@@ -29,24 +21,12 @@
         </div>
         <th:block th:unless="${error_message_code == 'code_expired'}" >
           <th:block th:if="${provider == 'uaa'}">
-            <form th:action="@{/invitations/accept.do}" method="post" novalidate="novalidate">
+            <form action="/invitations/accept.do" method="post" novalidate="novalidate">
                 <input name="code" type="hidden" value="code" th:value="${code}"/>
                 <input name="password" type="password" placeholder="Password" autocomplete="off" class="form-control"/>
-                <th:block layout:fragment="pw-requirements">
-                    <div id="password-requirements" class="password-req-box">
-                        <h5>Password must meet the following requirements:</h5>
-                        <ul class="list-unstyled" id="password-requirements-list">
-                            <li id="length-req" class="text-danger">At least <strong><span id="length-count"></span> characters long</strong></li>
-                            <li id="zxcvbn-req" class="text-danger"></li>
-                        </ul>
-                    </div>
-                </th:block>                
+                <th:block layout:include="pw_validation :: pw-requirements"></th:block>
                 <input name="password_confirmation" type="password" placeholder="Confirm" autocomplete="off" class="form-control"/>
-                <th:block layout:fragment="pw-confirm-req">
-                    <div id="pw-confirm-requirement" class="password-req-box">
-                        <h5 id='match-passwords-text'>Your passwords <strong><span id="match-passwords">DO NOT</span></strong> match</h5>
-                    </div>
-                </th:block>
+                <th:block layout:include="pw_validation :: pw-confirm-req"></th:block>
                 <input name="submit" type="submit" th:value="${!companyName.equals('Cloud Foundry') and isUaa ? 'Create ' + companyName + ' account' : 'Create account'}" class="island-button"/>
             </form>
           </th:block>
