@@ -49,6 +49,7 @@ pushd "${WAR_TEMPDIR}"
   mkdir -p templates/web
   cp -a "${JOB_DIR}"/web/* templates/web
   chmod -R 644 templates/web
+  chmod 755 templates/web
   chmod 755 templates/web/accounts
   chmod 755 templates/web/invitations
   zip -r "${JARFILE}" templates/web
