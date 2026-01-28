@@ -49,6 +49,9 @@ pushd "${WAR_TEMPDIR}"
   mkdir -p templates/web
   cp -a "${JOB_DIR}"/web/* templates/web
   chmod -R 644 templates/web
+  chmod 755 templates/web
+  chmod 755 templates/web/accounts
+  chmod 755 templates/web/invitations
   zip -r "${JARFILE}" templates/web
   chown -R vcap:vcap $JARFILE
   zip "$WARFILE" "$JARFILE"
@@ -56,10 +59,11 @@ pushd "${WAR_TEMPDIR}"
   mkdir resources
   cp -a "${JOB_DIR}"/resources/* resources/
   chmod -R 644 resources
-  chmod 644 resources/javascripts
-  chmod 644 resources/javascripts/vendor
-  chmod 644 resources/oss
-  chmod 644 resources/oss/stylesheets
+  chmod 755 resources/javascripts
+  chmod 755 resources/javascripts/vendor
+  chmod 755 resources/oss
+  chmod 755 resources/oss/stylesheets
+  chmod 755 resources
   zip -r "${WARFILE}" resources
   chown -R vcap:vcap $WARFILE
 popd
