@@ -42,7 +42,7 @@ jobs:
   - get: uaa-release
     trigger: true
   - get: uaa-customized-boshrelease
-
+    trigger: true  #take out later
   - task: pull-submodules-and-prepare-source
     config:
       platform: linux
@@ -86,6 +86,15 @@ jobs:
           ls -al src/uaa
 
   - task: merge-uaa-customized
+    params:
+      PRIVATE_YML_CONTENT: |-
+        ---
+        blobstore:
+          options:
+            region: us-gov-west-1
+            bucket_name: cloud-gov-release-blobstore
+            credentials_source: env_or_profile
+            server_side_encryption: AES256
     config:
       platform: linux
       image_resource:
@@ -97,10 +106,12 @@ jobs:
           aws_region: us-gov-west-1
           tag: latest
       inputs:
+      - name: uaa-release
       - name: uaa-release-source-repo
       - name: uaa-customized-boshrelease
       outputs:
-      - name: final-source # The final merged artifact
+      - name: final-source 
+      - name: finalized-release
       run:
         path: sh
         args:
@@ -113,16 +124,26 @@ jobs:
           # The `/.` is important to copy the contents, not the folder itself.
           cp -a uaa-release-source-repo/. final-source/
           
-          echo "--- Available inputs for merging ---"
-          ls -lR
-          
-          #
-          # cp -rv uaa-customized-boshrelease/config/* final-source/config/
-          # cp -rv uaa-customized-boshrelease/jobs/* final-source/jobs/
-          #
-          # ------------------------------------------------------------------
+          echo "--- Overlay uaa-customized files ---"
+          cp -rv uaa-customized-boshrelease/jobs/uaa-customized/templates/web/* final-source/src/uaa/server/src/main/resources/templates/web
+          cp -rv uaa-customized-boshrelease/jobs/uaa-customized/templates/resources/oss/stylesheets/* final-source/src/uaa/uaa/src/main/webapp/resources/oss/stylesheets 
+          cp -rv uaa-customized-boshrelease/jobs/uaa-customized/templates/resources/javascripts/* final-source/src/uaa/uaa/src/main/webapp/resources/javascripts
+          cp -rv uaa-customized-boshrelease/config/final.yml final-source/config/final.yml
 
-          echo "--- Merge complete. Final contents of 'final-source': ---"
-          ls -lR final-source
+          # Create release
+          export AWS_USE_FIPS_ENDPOINT=false
+          export UAA_VERSION=$(cat uaa-release/version)
+
+          pushd final-source
+
+          pushd uaa-release
+          bosh create-release --force --tarball="./uaa-customized-${UAA_VERSION}.tgz" --version=${UAA_VERSION}
+
+          #mv "uaa-customized-${UAA_VERSION}.tgz" "../finalized-release/uaa-customized-${UAA_VERSION}.tgz"
+
+          cat <<EOF > "config/private.yml"
+          $PRIVATE_YML_CONTENT
+          EOF
+
 
           exit 1 #keep container around for debugging for now
