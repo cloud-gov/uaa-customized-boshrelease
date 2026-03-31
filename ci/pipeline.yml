@@ -38,7 +38,7 @@ resources:
   icon: github
   source:
     uri: https://github.com/cloud-gov/uaa-customized-boshrelease
-    branch: v2
+    branch: main
 - name: uaa-customized-final-builds-dir-tarball
   source:
     bucket: cloud-gov-bosh-releases
@@ -89,8 +89,8 @@ jobs:
     - get: uaa-customized-boshrelease
       trigger: true
       params: {depth: 1}
-    #- set_pipeline: self
-    #  file: uaa-customized-boshrelease/ci/pipeline.yml
+    - set_pipeline: self
+      file: uaa-customized-boshrelease/ci/pipeline.yml
 
 - name: process-new-uaa-release
   plan:
@@ -99,7 +99,6 @@ jobs:
       - get: uaa-release
         trigger: true
       - get: uaa-customized-boshrelease
-        trigger: true
       - get: final-builds-dir-tarball
         resource: uaa-customized-final-builds-dir-tarball
       - get: releases-dir-tarball
