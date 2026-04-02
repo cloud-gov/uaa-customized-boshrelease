@@ -83,19 +83,6 @@
                         </div>
                     </div>
                     <div class="row offset-4">
-                        <div th:each="idp : ${idpDefinitions}"
-                            th:if="${idp.showSamlLink and idp.idpEntityAlias == 'cloud.gov'}"
-                            class="col col-xs-20 col-xs-push-2 offset-4">
-                            <!-- Cloud.gov IDP -->
-                            <a href="" th:href="@{saml2/authenticate/{entityAlias}(entityAlias=${idp.idpEntityAlias})}"
-                                class="saml-login-link btn--block btn--l color-blue text-left">
-                                <img src="" th:src="${idp.iconUrl}" class="badge--inline txt-m mls mrm"
-                                    alt="cloud.gov icon" />
-                                <span class="txt-m">Sign in with Cloud.gov</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="row offset-4">
                         <div class="col col-xs-24 offset-4">
                             <h3 class="h3-black ptxl pbl">
                                 Or use your agency credentials:
@@ -104,7 +91,7 @@
                     </div>
                     <div class="row offset-4">
                         <div th:each="idp : ${idpDefinitions}"
-                            th:if="${idp.showSamlLink and idp.idpEntityAlias != 'cloud.gov'}"
+                            th:if="${idp.showSamlLink and idp.idpEntityAlias != 'pickles.gov'}"
                             class="col col-xs-12 offset-4">
                             <!-- SAML -->
                             <a href="" th:href="@{saml2/authenticate/{entityAlias}(entityAlias=${idp.idpEntityAlias})}"
@@ -118,7 +105,7 @@
                         </div>
                         <div th:each="oauthLink : ${oauthLinks}" th:if="${oauthLink.value != 'Login.gov'}" class="col col-xs-12 offset-4">
                             <!-- Other OAuth links (excluding Login.gov) -->
-                            <a href="" th:href="${oauthLink.key}" th:text="${oauthLink.value}"
+                            <a href="" th:href="${oauthLink.key}"
                                 class="saml-login-link btn--block btn--m color-blue text-left">
                                 <img class="badge--inline txt-m" alt="US Flag icon"
                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAMAAABBPP0LAAAAG1BMVEUdM7EeNLIeM7HgQCDaPh/bPh/bPx/////bPyBEby41AAAAUElEQVQI123MNw4CABDEwD3jC/9/MQ1BQrgeOSkIqYe2o2FZtthXgQLgbHVMZdlsfUQFQnHtjP1+8BUhBDKOqtmfot6ojqPzR7TjdU+f6vkED+IDPhTBcMAAAAAASUVORK5CYII=" />
