@@ -6,7 +6,6 @@
     IDK what the most useful h1 would be for accessibility, I've added a simple one here. -->
     <h1 th:text="${T(org.cloudfoundry.identity.uaa.zone.IdentityZoneHolder).uaa ? 'Welcome!':'Welcome to '+zone_name+'!'}"
         class="visually-hidden">Sign in to Cloud.gov</h1>
-
     <div class="island-content">
         <div class="card notice js-notice">
             <p>This is a U.S. government service. Your use indicates your consent to monitoring, recording, and no
@@ -71,7 +70,18 @@
                             </h2>
                         </div>
                     </div>
-
+                    <div class="row offset-4">
+                        <div th:each="oauthLink : ${oauthLinks}" th:if="${oauthLink.value == 'Login.gov'}"
+                            class="col col-xs-20 col-xs-push-2 offset-4">
+                            <!-- OAuth: Login.gov (Moved to top) -->
+                            <a href="" th:href="${oauthLink.key}"
+                                class="saml-login-link btn--block btn--l color-blue text-left">
+                                <img class="badge--inline txt-m" alt="US Flag icon"
+                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAMAAABBPP0LAAAAG1BMVEUdM7EeNLIeM7HgQCDaPh/bPh/bPx/////bPyBEby41AAAAUElEQVQI123MNw4CABDEwD3jC/9/MQ1BQrgeOSkIqYe2o2FZtthXgQLgbHVMZdlsfUQFQnHtjP1+8BUhBDKOqtmfot6ojqPzR7TjdU+f6vkED+IDPhTBcMAAAAAASUVORK5CYII=" />
+                                <span class="txt-m">New! Sign in with Login.gov</span>
+                            </a>
+                        </div>
+                    </div>
                     <div class="row offset-4">
                         <div th:each="idp : ${idpDefinitions}"
                             th:if="${idp.showSamlLink and idp.idpEntityAlias == 'cloud.gov'}"
@@ -84,10 +94,7 @@
                                 <span class="txt-m">Sign in with Cloud.gov</span>
                             </a>
                         </div>
-
                     </div>
-
-
                     <div class="row offset-4">
                         <div class="col col-xs-24 offset-4">
                             <h3 class="h3-black ptxl pbl">
@@ -95,7 +102,6 @@
                             </h3>
                         </div>
                     </div>
-
                     <div class="row offset-4">
                         <div th:each="idp : ${idpDefinitions}"
                             th:if="${idp.showSamlLink and idp.idpEntityAlias != 'cloud.gov'}"
@@ -110,8 +116,8 @@
                                 </span>
                             </a>
                         </div>
-                        <div th:each="oauthLink : ${oauthLinks}" class="col col-xs-12 offset-4">
-                            <!-- OAuth -->
+                        <div th:each="oauthLink : ${oauthLinks}" th:if="${oauthLink.value != 'Login.gov'}" class="col col-xs-12 offset-4">
+                            <!-- Other OAuth links (excluding Login.gov) -->
                             <a href="" th:href="${oauthLink.key}" th:text="${oauthLink.value}"
                                 class="saml-login-link btn--block btn--m color-blue text-left">
                                 <img class="badge--inline txt-m" alt="US Flag icon"
@@ -136,9 +142,7 @@
             </div>
         </div>
     </div>
-
     <script type="text/javascript" src="/resources/javascripts/display_notice.js"
         th:src="@{'/resources/javascripts/display_notice.js'}"></script>
 </div>
-
 </html>
