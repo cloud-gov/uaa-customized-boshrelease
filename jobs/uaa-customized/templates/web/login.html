@@ -83,13 +83,6 @@
                         </div>
                     </div>
                     <div class="row offset-4">
-                        <div class="col col-xs-20 col-xs-push-2 offset-4">
-                            <p class="text-center mtm" style="font-size: 1.5em;">
-                                <a href="https://docs.cloud.gov/platform/getting-started/account-management/">Read more about the Login.gov account migrations</a>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row offset-4">
                         <div class="col col-xs-24 offset-4">
                             <h3 class="h3-black ptxl pbl">
                                 Or use your agency credentials:
@@ -98,7 +91,7 @@
                     </div>
                     <div class="row offset-4">
                         <div th:each="idp : ${idpDefinitions}"
-                            th:if="${idp.showSamlLink and idp.idpEntityAlias != 'pickles.gov'}"
+                            th:if="${idp.showSamlLink}"
                             class="col col-xs-12 offset-4">
                             <!-- SAML -->
                             <a href="" th:href="@{saml2/authenticate/{entityAlias}(entityAlias=${idp.idpEntityAlias})}"
