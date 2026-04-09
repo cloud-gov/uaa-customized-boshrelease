@@ -1,4 +1,3 @@
-// OIDCEmailDomainFilter.java
 package org.cloudfoundry.identity.uaa.extensions;
 
 import org.cloudfoundry.identity.uaa.authentication.UaaAuthentication;
@@ -12,10 +11,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+// Use jakarta instead of javax
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class OIDCEmailDomainFilter extends OncePerRequestFilter {
