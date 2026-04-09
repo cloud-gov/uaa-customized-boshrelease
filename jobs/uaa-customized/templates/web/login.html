@@ -61,6 +61,10 @@
         </div>
         <!-- /.modal -->
         <div class="js-full_login">
+            <!-- Error message for invalid email domain -->
+            <div th:if="${param.error == 'invalid_email_domain'}" class="card notice">
+                <p><strong>Access Denied:</strong> Login.gov authentication is only available for users with .gov or .mil email addresses. Please use your agency credentials or contact <a href="mailto:cloud-gov-support@gsa.gov">cloud-gov-support@gsa.gov</a> for assistance.</p>
+            </div>            
             <th:block th:if="${fieldUsernameShow}">
                 <div th:if="${showLoginLinks==true and fieldUsernameShow}" class="card saml-login">
                     <div class="row offset-4">

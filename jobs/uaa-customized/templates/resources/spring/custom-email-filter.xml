@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Define the custom filter bean -->
+    <bean id="oidcEmailDomainFilter" 
+          class="org.cloudfoundry.identity.uaa.extensions.OIDCEmailDomainFilter"/>
+
+    <!-- Insert the filter into the security filter chain -->
+    <bean id="customFilterRegistration" 
+          class="org.springframework.boot.web.servlet.FilterRegistrationBean">
+        <property name="filter" ref="oidcEmailDomainFilter"/>
+        <property name="urlPatterns">
+            <list>
+                <value>/oauth/authorize/*</value>
+                <value>/login/callback/*</value>
+            </list>
+        </property>
+        <!-- Place after OAuth2 authentication but before final authorization -->
+        <property name="order" value="100"/>
+    </bean>
+
+</beans>
