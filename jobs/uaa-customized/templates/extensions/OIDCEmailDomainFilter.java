@@ -17,10 +17,23 @@ public class OIDCEmailDomainFilter extends OncePerRequestFilter {
     
     private static final Logger logger = LoggerFactory.getLogger(OIDCEmailDomainFilter.class);
     
+    public OIDCEmailDomainFilter() {
+        logger.error("OIDCEmailDomainFilter CONSTRUCTOR CALLED - Filter instantiated");
+    }
+    
     @Override
     protected void doFilterInternal(HttpServletRequest request, 
                                    HttpServletResponse response, 
                                    FilterChain filterChain) throws ServletException, IOException {
+        
+        logger.error("OIDCEmailDomainFilter called for URI: {}", request.getRequestURI());
+        
+        // Log every request to see if filter is active
+        if (request.getRequestURI().contains("login") || 
+            request.getRequestURI().contains("oauth") || 
+            request.getRequestURI().contains("callback")) {
+            logger.error("OIDCEmailDomainFilter - Processing auth-related request: {}", request.getRequestURI());
+        }
         
         // Only check after successful authentication
         if (request.getRequestURI().contains("/oauth/authorize/callback") || 
