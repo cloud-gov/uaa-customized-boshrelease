@@ -6,7 +6,6 @@
     IDK what the most useful h1 would be for accessibility, I've added a simple one here. -->
     <h1 th:text="${T(org.cloudfoundry.identity.uaa.zone.IdentityZoneHolder).uaa ? 'Welcome!':'Welcome to '+zone_name+'!'}"
         class="visually-hidden">Sign in to Cloud.gov</h1>
-
     <div class="island-content">
         <div class="card notice js-notice">
             <p>This is a U.S. government service. Your use indicates your consent to monitoring, recording, and no
@@ -62,6 +61,10 @@
         </div>
         <!-- /.modal -->
         <div class="js-full_login">
+            <!-- Error message for invalid email domain -->
+            <div th:if="${param.error == 'invalid_email_domain'}" class="card notice">
+                <p><strong>Access Denied:</strong> Login.gov authentication is only available for users with .gov or .mil email addresses. Please use your agency credentials or contact <a href="mailto:cloud-gov-support@gsa.gov">cloud-gov-support@gsa.gov</a> for assistance.</p>
+            </div>            
             <th:block th:if="${fieldUsernameShow}">
                 <div th:if="${showLoginLinks==true and fieldUsernameShow}" class="card saml-login">
                     <div class="row offset-4">
@@ -71,23 +74,18 @@
                             </h2>
                         </div>
                     </div>
-
                     <div class="row offset-4">
-                        <div th:each="idp : ${idpDefinitions}"
-                            th:if="${idp.showSamlLink and idp.idpEntityAlias == 'cloud.gov'}"
+                        <div th:each="oauthLink : ${oauthLinks}" th:if="${oauthLink.value == 'Login.gov'}"
                             class="col col-xs-20 col-xs-push-2 offset-4">
-                            <!-- Cloud.gov IDP -->
-                            <a href="" th:href="@{saml2/authenticate/{entityAlias}(entityAlias=${idp.idpEntityAlias})}"
+                            <!-- OAuth: Login.gov (Moved to top) -->
+                            <a href="" th:href="${oauthLink.key}"
                                 class="saml-login-link btn--block btn--l color-blue text-left">
-                                <img src="" th:src="${idp.iconUrl}" class="badge--inline txt-m mls mrm"
-                                    alt="cloud.gov icon" />
-                                <span class="txt-m">Sign in with Cloud.gov</span>
+                                <img class="badge--inline txt-m" alt="Login.gov icon"
+                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAoCAYAAACfKfiZAAACdUlEQVR4Ae2XT2vTYBzHv7+nyWTgQk+ikK0dTND24vAyUEp2EsEJFb0PxIOn6SuwfQXtvHgQ1B39g/TozaIgXsSBzAlWFrvq1RqVqTPP4/MMUqoma590aS9+IA3heZrv53mS55eEINnIOmmD8yUuaJEgstDgFX2AJq7MqP1gvFx03TapcOaLl7rBAwh0RH4yf9ZI+aKCmOEDkh3jxhUmAAcjQywxGs3oA9IMI+a/wMgFDMSArP2wLl6AmZ/BnGXCW1vHxq072Gq1oAs1JwtC5w8p+yAO3FuGIffdqPAXly7De70OHbQvQVi4Yty2cfzmDRiWBR20BMZPnQwN75awz59DYgJmbqZ3nyRnQHhfsddoCXy7/6hnn9aDh9BBS4DLGfhcuR3Z/rZyXXspai9DxaFnd0OX4eMTDnSJVQmjlqHuEowloKpfFFbuKBIX2K0ODEVg39yxyDYrn0PiAmb+cGSblTuCxAXGdqmG6kZMVIDJx7DaolBleHxST0LrfUC9B3x/vtoRCW7Ibc/DL7lte19gTkxgS+eczanCJwikEZMBPkxkOlwmOJYxIuSn4ArjBqsKIhfDRo5+odkosWm33k4xKmLIMDLnd/bqx3brq4LEVQwJDiqfdt+4HQFFpvm0KgTKSBgVrqY+OP6jDmRaT0pJSvwd/o9AkhJh4aECgYRsKu7J6iC0fYZiWHikgGJqs17jjOYHkSCiurzbZ8+672qRfdAH7+1CiQjXwtpCK6EctRBUPtNsVNGDvh5G6pL4KTYtXx5XevUNRt1P+E5/aLJpO46sGXI2hKOOgxlQwT6hvOA26tBAW6BbhBNfXGMfM3GCA34DQkjcwWC8InwAAAAASUVORK5CYII=" />
+                                <span class="txt-m">Sign in with Login.gov</span>
                             </a>
                         </div>
-
                     </div>
-
-
                     <div class="row offset-4">
                         <div class="col col-xs-24 offset-4">
                             <h3 class="h3-black ptxl pbl">
@@ -95,10 +93,9 @@
                             </h3>
                         </div>
                     </div>
-
                     <div class="row offset-4">
                         <div th:each="idp : ${idpDefinitions}"
-                            th:if="${idp.showSamlLink and idp.idpEntityAlias != 'cloud.gov'}"
+                            th:if="${idp.showSamlLink}"
                             class="col col-xs-12 offset-4">
                             <!-- SAML -->
                             <a href="" th:href="@{saml2/authenticate/{entityAlias}(entityAlias=${idp.idpEntityAlias})}"
@@ -110,9 +107,9 @@
                                 </span>
                             </a>
                         </div>
-                        <div th:each="oauthLink : ${oauthLinks}" class="col col-xs-12 offset-4">
-                            <!-- OAuth -->
-                            <a href="" th:href="${oauthLink.key}" th:text="${oauthLink.value}"
+                        <div th:each="oauthLink : ${oauthLinks}" th:if="${oauthLink.value != 'Login.gov'}" class="col col-xs-12 offset-4">
+                            <!-- Other OAuth links (excluding Login.gov) -->
+                            <a href="" th:href="${oauthLink.key}"
                                 class="saml-login-link btn--block btn--m color-blue text-left">
                                 <img class="badge--inline txt-m" alt="US Flag icon"
                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAMAAABBPP0LAAAAG1BMVEUdM7EeNLIeM7HgQCDaPh/bPh/bPx/////bPyBEby41AAAAUElEQVQI123MNw4CABDEwD3jC/9/MQ1BQrgeOSkIqYe2o2FZtthXgQLgbHVMZdlsfUQFQnHtjP1+8BUhBDKOqtmfot6ojqPzR7TjdU+f6vkED+IDPhTBcMAAAAAASUVORK5CYII=" />
@@ -136,9 +133,7 @@
             </div>
         </div>
     </div>
-
     <script type="text/javascript" src="/resources/javascripts/display_notice.js"
         th:src="@{'/resources/javascripts/display_notice.js'}"></script>
 </div>
-
 </html>
