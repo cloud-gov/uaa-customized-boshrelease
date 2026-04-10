@@ -181,6 +181,9 @@ jobs:
           cp -rv uaa-customized-boshrelease/jobs/uaa-customized/templates/resources/javascripts/* release-git-repo/src/uaa/uaa/src/main/webapp/resources/javascripts
           cp -rv uaa-customized-boshrelease/config/final.yml release-git-repo/config/final.yml
 
+          # Filter .mil and .gov addresses for Login.gov - Not doing this for now after talking with Cyber Security
+          # cp -rv uaa-customized-boshrelease/jobs/uaa-customized/templates/java/org/cloudfoundry/indentity/uaa/provider/oauth/* uaa-release/src/uaa/server/src/main/java/org/cloudfoundry/identity/uaa/provider/oauth/
+
           export AWS_USE_FIPS_ENDPOINT=false
           export UAA_VERSION=$(cat uaa-release/version)
 
