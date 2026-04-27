@@ -1,139 +1,118 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{layouts/main}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main}" lang="en">
+<head>
+    <meta http-equiv="refresh" th:content="${@cookieBasedCsrfTokenRepository.getCookieMaxAge()}" />
+    <link th:if="${loginConsent != null}" href="/resources/oss/stylesheets/login-consent.css" th:href="@{${assetBaseUrl}+'/stylesheets/login-consent.css'}" rel="stylesheet"/>
+    <script th:if="${loginConsent != null}" type="text/javascript" src="/resources/javascripts/login_consent/consent.js" th:src="@{'/resources/javascripts/login_consent/consent.js'}"></script>
+</head>
 <div class="island" layout:fragment="page-content">
     <!--  This h1 is set to `.hidden` now, but that may be an acessibility problem.
     IDK what the most useful h1 would be for accessibility, I've added a simple one here. -->
     <h1 th:text="${T(org.cloudfoundry.identity.uaa.zone.IdentityZoneHolder).uaa ? 'Welcome!':'Welcome to '+zone_name+'!'}"
         class="visually-hidden">Sign in to Cloud.gov</h1>
     <div class="island-content">
-        <div class="card notice js-notice">
-            <p>This is a U.S. government service. Your use indicates your consent to monitoring, recording, and no
-                expectation of privacy. Misuse is subject to criminal and civil penalties. <a href="#"
-                    class="js-notice-read_more">Read more details.</a>
-            </p>
-            <input type="submit" value="Agree and continue" class="island-button js-notice-submit" />
-            <div class="panel-container">
-                <p>
-                    <a href="https://cloud.gov/docs/getting-started/accounts/">Learn about getting access to
-                        Cloud.gov.</a>
-                </p>
-            </div>
+
+        <div th:if="${error}"
+             class="alert alert-error">
+            <p th:text="${#messages.msgOrNull('login.' + error) ?: 'Error!'}"></p>
         </div>
-        <div class="js-notice-more_information modal fade">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close js-notice-more_information-dismiss" data-dismiss="modal"
-                            aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <h4 class="modal-title">This is a U.S. government service.</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>Cloud.gov is a U.S. General Services Administration federal government service, for official
-                            use by U.S. government employees and contractors working on U.S. government digital
-                            services.</p>
-                        <p>All use of Cloud.gov may be monitored, recorded, and subject to audit, by Cloud.gov
-                            operations staff and other federal government authorities. There is no expectation of
-                            privacy for users of this system. By continuing to use this system, you consent to your use
-                            being monitored and recorded.</p>
-                        <p>Unauthorized use is prohibited, and individuals found performing unauthorized activities are
-                            subject to disciplinary action including criminal prosecution.</p>
-                        <p>Acceptable uses of Cloud.gov include building and managing government digital services,
-                            making and trying test services to learn about how Cloud.gov works, and activities
-                            contributing to the development of Cloud.gov itself. We describe these intended uses (along
-                            with guidelines and policies) in more detail in the <a
-                                href="https://cloud.gov/docs/getting-started/accounts/">Cloud.gov documentation.</a>
-                        </p>
-                        <p>If you have questions about these conditions, please email <a
-                                href="mailto:cloud-gov-support@gsa.gov">cloud-gov-support@gsa.gov.</a>
-                        </p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-alternate js-notice-more_information-dismiss"
-                            data-dismiss="modal">Hide details</button>
+
+        <div th:unless="${error}"
+             th:if="${param.error}"
+             class="alert alert-error">
+            <p th:text="${#messages.msgOrNull('login.' + param.error[0]) ?: 'Error!'}"></p>
+        </div>
+
+        <div th:if="${param.success}" class="alert alert-success">
+            <p th:text="${#messages.msgOrNull('login.' + param.success[0]) ?: 'Success!'}"></p>
+        </div>
+
+        <th:block th:if="${fieldUsernameShow}">
+            <div th:if="${showLoginLinks==true and fieldUsernameShow}" class="card saml-login">
+                <div class="row offset-4">
+                    <div class="col col-xs-24 offset-4">
+                        <h2 class="h2-black mbxl mts">
+                            Choose your sign-in method
+                        </h2>
                     </div>
                 </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
-        <!-- /.modal -->
-        <div class="js-full_login">
-            <!-- Error message for invalid email domain -->
-            <div th:if="${param.error == 'invalid_email_domain'}" class="card notice">
-                <p><strong>Access Denied:</strong> Login.gov authentication is only available for users with .gov or .mil email addresses. Please use your agency credentials or contact <a href="mailto:cloud-gov-support@gsa.gov">cloud-gov-support@gsa.gov</a> for assistance.</p>
-            </div>            
-            <th:block th:if="${fieldUsernameShow}">
-                <div th:if="${showLoginLinks==true and fieldUsernameShow}" class="card saml-login">
-                    <div class="row offset-4">
-                        <div class="col col-xs-24 offset-4">
-                            <h2 class="h2-black mbxl mts">
-                                Choose your sign-in method
-                            </h2>
-                        </div>
-                    </div>
-                    <div class="row offset-4">
-                        <div th:each="oauthLink : ${oauthLinks}" th:if="${oauthLink.value == 'Login.gov'}"
-                            class="col col-xs-20 col-xs-push-2 offset-4">
-                            <!-- OAuth: Login.gov (Moved to top) -->
-                            <a href="" th:href="${oauthLink.key}"
-                                class="saml-login-link btn--block btn--l color-blue text-left">
-                                <img class="badge--inline txt-m" alt="Login.gov icon"
-                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAoCAYAAACfKfiZAAACdUlEQVR4Ae2XT2vTYBzHv7+nyWTgQk+ikK0dTND24vAyUEp2EsEJFb0PxIOn6SuwfQXtvHgQ1B39g/TozaIgXsSBzAlWFrvq1RqVqTPP4/MMUqoma590aS9+IA3heZrv53mS55eEINnIOmmD8yUuaJEgstDgFX2AJq7MqP1gvFx03TapcOaLl7rBAwh0RH4yf9ZI+aKCmOEDkh3jxhUmAAcjQywxGs3oA9IMI+a/wMgFDMSArP2wLl6AmZ/BnGXCW1vHxq072Gq1oAs1JwtC5w8p+yAO3FuGIffdqPAXly7De70OHbQvQVi4Yty2cfzmDRiWBR20BMZPnQwN75awz59DYgJmbqZ3nyRnQHhfsddoCXy7/6hnn9aDh9BBS4DLGfhcuR3Z/rZyXXspai9DxaFnd0OX4eMTDnSJVQmjlqHuEowloKpfFFbuKBIX2K0ODEVg39yxyDYrn0PiAmb+cGSblTuCxAXGdqmG6kZMVIDJx7DaolBleHxST0LrfUC9B3x/vtoRCW7Ibc/DL7lte19gTkxgS+eczanCJwikEZMBPkxkOlwmOJYxIuSn4ArjBqsKIhfDRo5+odkosWm33k4xKmLIMDLnd/bqx3brq4LEVQwJDiqfdt+4HQFFpvm0KgTKSBgVrqY+OP6jDmRaT0pJSvwd/o9AkhJh4aECgYRsKu7J6iC0fYZiWHikgGJqs17jjOYHkSCiurzbZ8+672qRfdAH7+1CiQjXwtpCK6EctRBUPtNsVNGDvh5G6pL4KTYtXx5XevUNRt1P+E5/aLJpO46sGXI2hKOOgxlQwT6hvOA26tBAW6BbhBNfXGMfM3GCA34DQkjcwWC8InwAAAAASUVORK5CYII=" />
-                                <span class="txt-m">Sign in with Login.gov</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="row offset-4">
-                        <div class="col col-xs-24 offset-4">
-                            <h3 class="h3-black ptxl pbl">
-                                Or use your agency credentials:
-                            </h3>
-                        </div>
-                    </div>
-                    <div class="row offset-4">
-                        <div th:each="idp : ${idpDefinitions}"
-                            th:if="${idp.showSamlLink}"
-                            class="col col-xs-12 offset-4">
-                            <!-- SAML -->
-                            <a href="" th:href="@{saml2/authenticate/{entityAlias}(entityAlias=${idp.idpEntityAlias})}"
-                                class="saml-login-link btn--block btn--m color-blue text-left">
-                                <img src="" th:src="${idp.iconUrl}" class="badge--inline txt-m"
-                                    th:alt="${idp.linkText}" />
-                                <span th:text="${idp.linkText}" class="txt-m">
-                                    Use your corporate credentials
-                                </span>
-                            </a>
-                        </div>
-                        <div th:each="oauthLink : ${oauthLinks}" th:if="${oauthLink.value != 'Login.gov'}" class="col col-xs-12 offset-4">
-                            <!-- Other OAuth links (excluding Login.gov) -->
-                            <a href="" th:href="${oauthLink.key}"
-                                class="saml-login-link btn--block btn--m color-blue text-left">
-                                <img class="badge--inline txt-m" alt="US Flag icon"
-                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAMAAABBPP0LAAAAG1BMVEUdM7EeNLIeM7HgQCDaPh/bPh/bPx/////bPyBEby41AAAAUElEQVQI123MNw4CABDEwD3jC/9/MQ1BQrgeOSkIqYe2o2FZtthXgQLgbHVMZdlsfUQFQnHtjP1+8BUhBDKOqtmfot6ojqPzR7TjdU+f6vkED+IDPhTBcMAAAAAASUVORK5CYII=" />
-                                <span th:text="${oauthLink.value}" class="txt-m">
-                                    Use your corporate credentials
-                                </span>
-                            </a>
-                        </div>
+                <div class="row offset-4">
+                    <div th:each="oauthLink : ${oauthLinks}" th:if="${oauthLink.value == 'Login.gov'}"
+                        class="col col-xs-20 col-xs-push-2 offset-4">
+                        <!-- OAuth: Login.gov (Moved to top) -->
+                        <a href="" th:href="${oauthLink.key}"
+                            class="saml-login-link btn--block btn--l color-blue text-left">
+                            <img class="badge--inline txt-m" alt="Login.gov icon"
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAoCAYAAACfKfiZAAACdUlEQVR4Ae2XT2vTYBzHv7+nyWTgQk+ikK0dTND24vAyUEp2EsEJFb0PxIOn6SuwfQXtvHgQ1B39g/TozaIgXsSBzAlWFrvq1RqVqTPP4/MMUqoma590aS9+IA3heZrv53mS55eEINnIOmmD8yUuaJEgstDgFX2AJq7MqP1gvFx03TapcOaLl7rBAwh0RH4yf9ZI+aKCmOEDkh3jxhUmAAcjQywxGs3oA9IMI+a/wMgFDMSArP2wLl6AmZ/BnGXCW1vHxq072Gq1oAs1JwtC5w8p+yAO3FuGIffdqPAXly7De70OHbQvQVi4Yty2cfzmDRiWBR20BMZPnQwN75awz59DYgJmbqZ3nyRnQHhfsddoCXy7/6hnn9aDh9BBS4DLGfhcuR3Z/rZyXXspai9DxaFnd0OX4eMTDnSJVQmjlqHuEowloKpfFFbuKBIX2K0ODEVg39yxyDYrn0PiAmb+cGSblTuCxAXGdqmG6kZMVIDJx7DaolBleHxST0LrfUC9B3x/vtoRCW7Ibc/DL7lte19gTkxgS+eczanCJwikEZMBPkxkOlwmOJYxIuSn4ArjBqsKIhfDRo5+odkosWm33k4xKmLIMDLnd/bqx3brq4LEVQwJDiqfdt+4HQFFpvm0KgTKSBgVrqY+OP6jDmRaT0pJSvwd/o9AkhJh4aECgYRsKu7J6iC0fYZiWHikgGJqs17jjOYHkSCiurzbZ8+672qRfdAH7+1CiQjXwtpCK6EctRBUPtNsVNGDvh5G6pL4KTYtXx5XevUNRt1P+E5/aLJpO46sGXI2hKOOgxlQwT6hvOA26tBAW6BbhBNfXGMfM3GCA34DQkjcwWC8InwAAAAASUVORK5CYII=" />
+                            <span class="txt-m">Sign in with Login.gov</span>
+                        </a>
                     </div>
                 </div>
-            </th:block>
-        </div>
+                <div class="row offset-4">
+                    <div class="col col-xs-24 offset-4">
+                        <h3 class="h3-black ptxl pbl">
+                            Or use your agency credentials:
+                        </h3>
+                    </div>
+                </div>
+                <div class="row offset-4">
+                    <div th:each="idp : ${idpDefinitions}"
+                        th:if="${idp.showSamlLink}"
+                        class="col col-xs-12 offset-4">
+                        <!-- SAML -->
+                        <a href="" th:href="@{saml2/authenticate/{entityAlias}(entityAlias=${idp.idpEntityAlias})}"
+                            class="saml-login-link btn--block btn--m color-blue text-left">
+                            <img src="" th:src="${idp.iconUrl}" class="badge--inline txt-m"
+                                th:alt="${idp.linkText}" />
+                            <span th:text="${idp.linkText}" class="txt-m">
+                                Use your corporate credentials
+                            </span>
+                        </a>
+                    </div>
+                    <div th:each="oauthLink : ${oauthLinks}" th:if="${oauthLink.value != 'Login.gov'}" class="col col-xs-12 offset-4">
+                        <!-- Other OAuth links (excluding Login.gov) -->
+                        <a href="" th:href="${oauthLink.key}"
+                            class="saml-login-link btn--block btn--m color-blue text-left">
+                            <img class="badge--inline txt-m" alt="US Flag icon"
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAMAAABBPP0LAAAAG1BMVEUdM7EeNLIeM7HgQCDaPh/bPh/bPx/////bPyBEby41AAAAUElEQVQI123MNw4CABDEwD3jC/9/MQ1BQrgeOSkIqYe2o2FZtthXgQLgbHVMZdlsfUQFQnHtjP1+8BUhBDKOqtmfot6ojqPzR7TjdU+f6vkED+IDPhTBcMAAAAAASUVORK5CYII=" />
+                            <span th:text="${oauthLink.value}" class="txt-m">
+                                Use your corporate credentials
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </th:block>
     </div>
-    <div id="cli-info" class="panel-container hidden">
-        <div class="island-content">
-            <div class="card-transparent notice">
-                <p>Developers can log in via the command line:</p>
-                <pre class="card code">cf login -a api.fr.cloud.gov  --sso</pre>
-                <a href="https://cloud.gov/docs/getting-started/setup/#quick-reference">See our documentation for login
-                    details</a>
+    
+    <!-- Optional: Login Consent Modal -->
+    <div th:if="${loginConsent != null}" 
+         id="loginConsentModal" 
+         class="consent-modal-overlay" 
+         role="dialog"
+         aria-labelledby="consentModalTitle"
+         aria-modal="true"
+         th:attr="data-consent-hash=${loginConsentHash},data-consent-duration=${loginConsentDurationSeconds}">
+        <div class="consent-modal">
+            <div class="consent-modal-header">
+                <h2 id="consentModalTitle" th:text="${loginConsent.title}">Notice and Consent</h2>
+            </div>
+            <div class="consent-modal-body">
+                <div class="consent-modal-content" th:utext="${loginConsent.text}">
+                    <!-- Consent text will be inserted here -->
+                </div>
+            </div>
+            <div class="consent-modal-footer">
+                <button type="button" 
+                        id="consentAcceptButton" 
+                        class="consent-button consent-button-accept"
+                        th:text="${loginConsent.acceptButtonText}">I Accept</button>
+                <a th:unless="${#strings.isEmpty(loginConsent.declineLink)}"
+                   th:href="${loginConsent.declineLink}" 
+                   class="consent-button consent-button-decline" 
+                   th:text="${loginConsent.declineButtonText}">Decline</a>
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="/resources/javascripts/display_notice.js"
-        th:src="@{'/resources/javascripts/display_notice.js'}"></script>
 </div>
 </html>
